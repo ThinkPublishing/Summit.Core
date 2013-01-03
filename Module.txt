@@ -1,0 +1,7 @@
+﻿Name: Summit
+AntiForgery: enabled
+Author: Carl Woodhouse
+Website: http://www.carlwoodhouse.com
+Version: 1.0
+OrchardVersion: 1.0
+Description: summit module

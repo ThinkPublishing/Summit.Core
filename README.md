@@ -1,4 +1,4 @@
 Summit.Core
 ===========
 
-Main module for summit
+Main module for summit.

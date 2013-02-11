@@ -32,5 +32,30 @@ namespace Summit.Core {
 
             return 1;
         }
+
+        public int UpdateFrom1() {
+            ContentDefinitionManager.AlterPartDefinition("DestinationPart",
+                cfg => cfg
+                        .WithField("Name", field => field.OfType("TextField").WithDisplayName("Destination Name"))
+                        .WithField("Image", field => field.OfType("ImageField").WithDisplayName("Destination Image"))
+                        .WithField("Country", field => field.OfType("TextField").WithDisplayName("Destination Country"))
+                        .WithField("Region", field => field.OfType("Region").WithDisplayName("Destination Region")));
+
+            ContentDefinitionManager.AlterTypeDefinition("Destination",
+                cfg => cfg
+                    .WithPart("CommonPart", p => p
+                       .WithSetting("DateEditorSettings.ShowDateEditor", "true"))
+                    .WithPart("TitlePart")
+                    .WithPart("AutoroutePart", builder => builder
+                        .WithSetting("AutorouteSettings.AllowCustomPattern", "false")
+                        .WithSetting("AutorouteSettings.AutomaticAdjustmentOnEdit", "false")
+                        .WithSetting("AutorouteSettings.PatternDefinitions", "[{Name:'Title', Pattern: '{Content.Slug}', Description: 'my-destination'}]")
+                        .WithSetting("AutorouteSettings.DefaultPatternIndex", "0"))
+                    .WithPart("DestinationPart")
+                    .Creatable()
+                );
+
+            return 2;
+        }
     }
 }

@@ -1,7 +1,8 @@
-﻿Name: Summit
+﻿Name: Summit.Core
 AntiForgery: enabled
-Author: Carl Woodhouse
-Website: http://www.carlwoodhouse.com
+Author: Carl Woodhouse (zaust.com)
+Website: http://www.zaust.com
 Version: 1.0
 OrchardVersion: 1.6
 Description: summit module
+Dependencies: Shapes, Common, Orchard.PublishLater

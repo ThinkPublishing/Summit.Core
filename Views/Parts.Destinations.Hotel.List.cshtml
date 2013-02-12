@@ -1,0 +1,58 @@
+﻿@{
+    Script.Require("gmap3").AtFoot();
+    IEnumerable<object> hotels = Model.ContentItems;
+    Model.ContentItems.Classes.Add("content-items");
+    Model.ContentItems.Classes.Add("hotels");
+
+    var addresses = new List<List<string>>();
+    var addressjson = string.Empty;
+    var ct1 = string.Empty;
+    var ct2 = string.Empty;
+}
+
+@if (hotels == null || !hotels.Any())
+{
+    <p>@T("There are no hotels for this destination.")</p>
+}
+else
+{
+    foreach (var item in Model.ItemModels)
+    {
+        addresses.Add(new List<string> { item.ContentItem.LocationPart.Address.Value, item.ContentItem.LocationPart.City.Value, item.ContentItem.LocationPart.ProvinceState.Value, item.ContentItem.LocationPart.Country.Value, item.ContentItem.LocationPart.Postcode.Value });
+    }
+
+    addressjson = string.Empty;
+
+    var count = 0;
+    foreach (var address in addresses)
+    {
+        addressjson = string.Concat(addressjson, "{address:\"", string.Join(",", address), "\"}", count < addresses.Count -1 ? "," : string.Empty);
+        count++;
+    }
+}
+
+@ct1 / @ct2 /
+
+@addressjson
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#destination-map").gmap3({
+                    map: {
+                        options: {
+                            maxZoom: 14
+                        }
+                    },
+                    marker: {
+                        values: [@Html.Raw(addressjson)]
+                }
+            },
+            "autofit");
+        });
+    </script>
+}
+
+
+<div id="destination-map" style="width: 700px; height: 500px;"></div>

@@ -1,0 +1,9 @@
+﻿@using Orchard.ContentManagement;
+@using Summit.Core.Models
+@using Summit.Core.Extensions
+@{
+    ContentItem contentItem = Model.ContentItem;
+    var destination = (DestinationPart)contentItem.Get(typeof(DestinationPart));
+}
+<a href="@Url.DestinationForAdmin(destination)" title="@T("List Hotels")">@T("List Hotels")</a>@T(" | ")
+<a href="@Url.HotelCreate(destination)" title="@T("New Hotel")">@T("New Hotel")</a>@T(" | ")

@@ -1,0 +1,12 @@
+﻿@using Summit.Core.Extensions
+@using Summit.Core.Models
+@{
+    Style.Require("SummitAdmin");
+}
+@if (AuthorizedFor(Summit.Core.Permissions.ManageDestinations)) {
+<div class="item-properties actions">
+    <p><a href="@Url.DestinationEdit((DestinationPart)Model.ContentPart)" class="edit">@T("Destination Properties")</a></p>
+</div>
+}
+
+thiz

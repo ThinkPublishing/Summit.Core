@@ -23,6 +23,13 @@ namespace Summit.Core {
                         .WithField("Postcode", field => field.OfType("TextField").WithDisplayName("Postcode"))
                         );
 
+            ContentDefinitionManager.AlterPartDefinition("DestinationPart",
+                cfg => cfg
+                        .WithField("Region", field => field.OfType("TextField").WithDisplayName("Region"))
+                        .WithField("Country", field => field.OfType("TextField").WithDisplayName("Country"))
+                        .WithField("Logo", field => field.OfType("ImageField").WithDisplayName("Image"))
+                        );
+
             ContentDefinitionManager.AlterTypeDefinition("Hotel",
                  cfg => cfg
                      .WithPart("CommonPart", p => p
@@ -32,24 +39,27 @@ namespace Summit.Core {
                      .WithPart("AutoroutePart", builder => builder
                          .WithSetting("AutorouteSettings.AllowCustomPattern", "true")
                          .WithSetting("AutorouteSettings.AutomaticAdjustmentOnEdit", "false")
-                         .WithSetting("AutorouteSettings.PatternDefinitions", "[{Name:'Title', Pattern: 'hotel/{Content.Slug}', Description: 'hotel/my-hotel'}]")
+                         .WithSetting("AutorouteSettings.PatternDefinitions", "[{Name:'Title', Pattern: '{Content.Container.Path}/{Content.Slug}', Description: 'destination/my-hotel'}]")
                          .WithSetting("AutorouteSettings.DefaultPatternIndex", "0"))
                      .WithPart("HotelPart")
                      .WithPart("LocationPart")
                      .Draftable()
-                     .Creatable()
                  );
 
+            ContentDefinitionManager.AlterTypeDefinition("Destination", 
+                cfg => cfg
+                    .WithPart("CommonPart", p => p
+                        .WithSetting("DateEditorSettings.ShowDateEditor", "false"))
+                    .WithPart("TitlePart")
+                    .WithPart("AutoroutePart", builder => builder
+                        .WithSetting("AutorouteSettings.AllowCustomPattern", "true")
+                        .WithSetting("AutorouteSettings.AutomaticAdjustmentOnEdit", "false")
+                        .WithSetting("AutorouteSettings.PatternDefinitions", "[{Name:'Title', Pattern: '{Content.Slug}', Description: 'my-destination'}]")
+                        .WithSetting("AutorouteSettings.DefaultPatternIndex", "0"))
+                    .WithPart("DestinationPart")
+                );
+
             return 1;
-        }
-
-        public int UpdateFrom1()
-        {
-            
-
-            ContentDefinitionManager.AlterTypeDefinition("Hotel", cfg => cfg.WithPart("LocationPart"));
-
-            return 2;
         }
     }
 }

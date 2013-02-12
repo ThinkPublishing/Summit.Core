@@ -1,0 +1,39 @@
+﻿@using Orchard.ContentManagement
+@{
+    IEnumerable<object> contentItems = Model.ContentItems;
+
+    Script.Require("gmap3").AtFoot();
+
+    var addresses = new List<List<string>>();
+
+    foreach (var item in Model.ContentItems)
+    {
+           addresses.Add(new List<string> { (string) item.Content.LocationPart.Address.Value });                               
+    }
+    
+}
+
+@using (Script.Foot()) {
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#destination-map").gmap3({
+                    map: {
+                        options: {
+                            maxZoom: 14
+                        }
+                    },
+                    marker: {
+                        address: @addresses.Select(x => string.Join(",",  x)).FirstOrDefault(),
+                        options: {
+                            icon: new google.maps.MarkerImage(
+                                "http://gmap3.net/skin/gmap/magicshow.png",
+                                new google.maps.Size(32, 37, "px", "px"))
+                        }
+                    }
+                },
+                "autofit");
+        });               
+    </script>
+}
+
+<div id="destination-map" style="width: 700px; height: 500px;"></div>

@@ -124,12 +124,12 @@ namespace Summit.Core.Controllers
 
         //todo: the content shape template has extra bits that the core contents module does not (remove draft functionality)
         //todo: - move this extra functionality there or somewhere else that's appropriate?
-        public ActionResult Edit(int destinationId, int postId)
+        public ActionResult Edit(int destinationId, int hotelId)
         {
             var destination = destinationService.Get(destinationId, VersionOptions.Latest);
             if (destination == null) return HttpNotFound();
 
-            var hotel = hotelService.Get(postId, VersionOptions.Latest);
+            var hotel = hotelService.Get(hotelId, VersionOptions.Latest);
             if (hotel == null) return HttpNotFound();
 
             if (!Services.Authorizer.Authorize(Permissions.EditHotel, hotel, T("Couldn't edit blog post"))) return new HttpUnauthorizedResult();
@@ -142,11 +142,11 @@ namespace Summit.Core.Controllers
         [HttpPost]
         [ActionName("Edit")]
         [FormValueRequired("submit.Save")]
-        public ActionResult EditPOST(int destinationId, int postId, string returnUrl)
+        public ActionResult EditPOST(int destinationId, int hotelId, string returnUrl)
         {
             return EditPOST(
                 destinationId,
-                postId,
+                hotelId,
                 returnUrl,
                 contentItem =>
                     {

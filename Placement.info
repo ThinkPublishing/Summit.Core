@@ -1,0 +1,14 @@
+﻿<Placement>
+    <Match ContentType="Hotel">
+        <Match DisplayType="Detail">
+            <Place Parts_Title="-" />
+            <Place Parts_Common_Metadata="-" />
+            <Place Fields_Common_Text-Description="-"/>
+            <Place Fields_Common_Text-Address="-"/>
+            <Place Fields_Common_Text-City="-"/>
+            <Place Fields_Common_Text-ProvinceState="-"/>
+            <Place Fields_Common_Text-Country="-"/>
+            <Place Fields_Common_Text-Postcode="-"/>
+        </Match>
+    </Match>
+</Placement>

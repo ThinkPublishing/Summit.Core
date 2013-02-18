@@ -5,4 +5,4 @@ Website: http://www.zaust.com
 Version: 1.0
 OrchardVersion: 1.6
 Description: summit module
-Dependencies: Shapes, Common, Orchard.PublishLater
+Dependencies: Shapes, Common, Orchard.PublishLater, Orchard.ContentPicker

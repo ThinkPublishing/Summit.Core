@@ -12,7 +12,11 @@ namespace Summit.Core {
                         .WithField("Logo", field => field.OfType("ImageField").WithDisplayName("Logo"))
                         .WithField("Phone", field => field.OfType("TextField").WithDisplayName("Phone Number"))
                         .WithField("ReservationUrl", field => field.OfType("TextField").WithDisplayName("Reservation Url"))
-                        .WithField("Active", field => field.OfType("BooleanField").WithDisplayName("Active")));
+                        .WithField("Active", field => field.OfType("BooleanField").WithDisplayName("Active"))
+                        .WithField("Conceirge", field => field.OfType("ContentPickerField")
+                                .WithSetting("ContentPickerField.Required", "true")
+                                .WithSetting("ContentPickerField.Multiple", "false"))
+                        );
 
             ContentDefinitionManager.AlterPartDefinition("LocationPart",
                 cfg => cfg
@@ -58,6 +62,40 @@ namespace Summit.Core {
                         .WithSetting("AutorouteSettings.DefaultPatternIndex", "0"))
                     .WithPart("DestinationPart")
                 );
+
+            ContentDefinitionManager.AlterPartDefinition("ConceirgePart",
+                    cfg => cfg
+                            .WithField("Position", field => field.OfType("TextField").WithDisplayName("Position"))
+                            .WithField("ServiceLength", field => field.OfType("TextField").WithDisplayName("Length of service"))
+                            .WithField("StrangestRequest", field => field.OfType("TextField").WithDisplayName("Strangest request"))
+                            .WithField("FavouriteMoment", field => field.OfType("TextField").WithDisplayName("Favourite moment"))
+                            .WithField("FavouriteRoom", field => field.OfType("TextField").WithDisplayName("Favourite room in the hotel"))
+                            .WithField("Image", field => field.OfType("ImageField"))
+                            .WithField("Active", field => field.OfType("BooleanField").WithDisplayName("Active"))
+                            .WithField("Question1", field => field.OfType("TextField"))
+                            .WithField("Question2", field => field.OfType("TextField"))
+                            .WithField("Question3", field => field.OfType("TextField"))
+                            .WithField("Question4", field => field.OfType("TextField"))
+                            .WithField("Question5", field => field.OfType("TextField"))
+                            .WithField("Question6", field => field.OfType("TextField"))
+                            .WithField("Question7", field => field.OfType("TextField"))
+                            .WithField("Question8", field => field.OfType("TextField"))
+                            .WithField("Question9", field => field.OfType("TextField"))
+                            .WithField("Question10", field => field.OfType("TextField"))
+                            .WithField("Question11", field => field.OfType("TextField"))
+                            .WithField("Question12", field => field.OfType("TextField"))
+                            .WithField("Question13", field => field.OfType("TextField"))
+                            .WithField("Question14", field => field.OfType("TextField"))
+                            .WithField("Question15", field => field.OfType("TextField"))
+                );
+
+            ContentDefinitionManager.AlterTypeDefinition("Conceirge",
+              cfg => cfg
+                  .WithPart("CommonPart", p => p
+                      .WithSetting("DateEditorSettings.ShowDateEditor", "false"))
+                  .WithPart("TitlePart")
+                  .WithPart("ConceirgePart")
+              );
 
             return 1;
         }

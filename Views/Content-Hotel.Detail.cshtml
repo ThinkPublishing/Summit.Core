@@ -1,0 +1,70 @@
+﻿@{
+    if (Model.Title != null) {
+        Layout.Title = Model.Title;
+    }
+
+    Script.Require("gmap3").AtFoot();
+    var address = new List<string> {Model.ContentItem.LocationPart.Address.Value, Model.ContentItem.LocationPart.City.Value, Model.ContentItem.LocationPart.ProvinceState.Value, Model.ContentItem.LocationPart.Country.Value, Model.ContentItem.LocationPart.Postcode.Value};
+    var addressjson = string.Concat("{address:\"", string.Join(",", address), "\"}");
+    var conceirge = Model.ContentItem.HotelPart.Conceirge.ContentItems[0];
+}
+
+@if (conceirge != null) {
+    <div id="conceirge">
+        <ul>
+            <li>Name @conceirge.TitlePart.Title</li>
+            @foreach (var field in conceirge.ConceirgePart.Fields) 
+            {
+                // need to limit to textfield
+                 <li>@field.DisplayName : @field.Value</li>                                                          
+            }
+        </ul>
+    </div>
+}
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#destination-map").gmap3({
+                    map: {
+                        options: {
+                            maxZoom: 14
+                        }
+                    },
+                    marker: {
+                        values: [@Html.Raw(addressjson)]
+                }
+            },
+            "autofit");
+        });
+    </script>
+}
+
+<div id="destination-map" style="width: 400px; height: 300px;"></div>
+
+<div id="book">
+    <h4>Book with @Model.ContentItem.TitlePart.Title</h4>
+    <a href="@Model.ContentItem.HotelPart.ReservationUrl.Value">
+        Book Now
+    </a>
+</div>
+
+
+---------------------------------------------------
+<article class="content-Model">
+    <header>
+        @Display(Model.Header)
+        @if (Model.Meta != null) {
+        <div class="metadata">
+            @Display(Model.Meta)
+        </div>
+        }
+    </header>
+    @Display(Model.Content)
+    @if(Model.Footer != null) {
+    <footer>
+        @Display(Model.Footer)
+    </footer>
+    }
+</article>

@@ -1,4 +1,9 @@
 ﻿<Placement>
+    <!--fields-->
+    <Place Fields_Question_Edit="Content:2.4"/>
+    <Place Fields_Question="Content:after"/>
+   
+    <!--hotel-->
     <Match ContentType="Hotel">
         <Match DisplayType="Detail">
             <Place Parts_Title="-" />

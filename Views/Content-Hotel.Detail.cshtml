@@ -7,6 +7,7 @@
     var address = new List<string> {Model.ContentItem.LocationPart.Address.Value, Model.ContentItem.LocationPart.City.Value, Model.ContentItem.LocationPart.ProvinceState.Value, Model.ContentItem.LocationPart.Country.Value, Model.ContentItem.LocationPart.Postcode.Value};
     var addressjson = string.Concat("{address:\"", string.Join(",", address), "\"}");
     var conceirge = Model.ContentItem.HotelPart.Conceirge.ContentItems[0];
+    var location = Model.ContentItem.HotelPart.DestinationPart.ContentItem.TitlePart.Title;
 }
 
 @if (conceirge != null) {
@@ -15,10 +16,21 @@
             <li>Name @conceirge.TitlePart.Title</li>
             @foreach (var field in conceirge.ConceirgePart.Fields) 
             {
-                // need to limit to textfield
-                 <li>@field.DisplayName : @field.Value</li>                                                          
+                if (field.FieldDefinition.Name == "TextField") {
+                    <li>@field.DisplayName : @field.Value</li>
+                }
             }
         </ul>
+    </div>
+    
+    <div id="conceirge-questions">
+          @foreach (var field in conceirge.ConceirgePart.Fields) 
+            {
+                if (field.FieldDefinition.Name == "QuestionField") {
+                    <h4>@field.PartFieldDefinition.Settings["QuestionFieldSettings.Question1"].Replace("[location]", location)</h4> 
+                    <p>@field.Value</p>
+                }
+            }
     </div>
 }
 

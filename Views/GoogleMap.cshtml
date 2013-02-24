@@ -1,0 +1,57 @@
+﻿@{
+    Script.Require("gmap3").AtFoot();
+    var mapId = !string.IsNullOrWhiteSpace((string)Model.MapId) ? Model.MapId : "destination-map";
+    var width = !string.IsNullOrWhiteSpace((string)Model.Width) ? string.Concat((string)Model.Width , "px") : "700px";
+    var height = !string.IsNullOrWhiteSpace((string)Model.Height) ? string.Concat((string) Model.Height, "px") : "300px";
+}
+
+<div id="@mapId" style="width:@width; height: @height;"></div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#@mapId").gmap3({
+                    map: {
+                        options: {
+                            maxZoom: 14
+                        }
+                    },
+                    marker: {
+                        values: [@Model.Markers],
+                        options:{ draggable: false },
+                        events:{
+                            mouseover: function(marker, event, context) 
+                            {
+                                var map = $(this).gmap3("get"), infowindow = $(this).gmap3({get:{name:"infowindow"}});
+                                if (infowindow)
+                                {
+                                    infowindow.open(map, marker);
+                                    infowindow.setContent(context.data);
+                                    console.log("info1");
+                                } 
+                                else {
+                                    $(this).gmap3({
+                                        infowindow:{
+                                          anchor:marker, 
+                                          options:{content: context.data}
+                                        }
+                                    });
+
+                                    console.log("info2");
+                                }   
+                            },
+                            closeclick: function()
+                            {
+                                var infowindow = $(this).gmap3({get:{name:"infowindow"}});
+                                if (infowindow){
+                                  infowindow.close();
+                                }
+                            }
+                        }
+                    }
+                },
+                "autofit");
+        });
+    </script>
+}

@@ -33,6 +33,21 @@ namespace Summit.Core
                         {
                             Route =
                                 new Route(
+                                "Search/{snippet}",
+                                new RouteValueDictionary
+                                    {
+                                        { "area", "Summit.Core" },
+                                        { "controller", "Search" },
+                                        { "action", "Find" }
+                                    },
+                                new RouteValueDictionary(),
+                                new RouteValueDictionary { { "area", "Summit.Core" } },
+                                new MvcRouteHandler())
+                        },
+                    new RouteDescriptor
+                        {
+                            Route =
+                                new Route(
                                 "Admin/Destinations/Create",
                                 new RouteValueDictionary
                                     {

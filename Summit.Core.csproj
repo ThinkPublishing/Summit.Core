@@ -66,6 +66,7 @@
     <Content Include="Content\Admin\images\published.gif" />
     <Content Include="Content\Admin\images\scheduled.gif" />
     <Content Include="Scripts\gmap3.min.js" />
+    <Content Include="Scripts\search-widget.js" />
     <Content Include="Styles\menu.summit-admin.css" />
     <Content Include="Styles\summit-admin.css" />
     <Content Include="Web.config" />
@@ -91,12 +92,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminMenu.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\DestinationAdminController.cs" />
     <Compile Include="Controllers\DestinationController.cs" />
     <Compile Include="Controllers\HotelAdminController.cs" />
+    <Compile Include="Drivers\SearchWidgetPartDriver.cs" />
     <Compile Include="Drivers\DestinationPartDriver.cs" />
     <Compile Include="Drivers\HotelPartDriver.cs" />
     <Compile Include="Drivers\QuestionFieldDriver.cs" />
+    <Compile Include="Extensions\ContentExtensions.cs" />
+    <Compile Include="Extensions\HtmlHelperMapExtensions.cs" />
     <Compile Include="Extensions\UrlHelperExtensions.cs" />
     <Compile Include="Fields\QuestionField.cs" />
     <Compile Include="Handlers\DestinationPartHandler.cs" />
@@ -104,6 +109,7 @@
     <Compile Include="Migrations.cs" />
     <Compile Include="Models\DestinationPart.cs" />
     <Compile Include="Models\HotelPart.cs" />
+    <Compile Include="Models\SearchWidgetPart.cs" />
     <Compile Include="Permissions.cs" />
     <Compile Include="ResourceManifest.cs" />
     <Compile Include="Routes.cs" />
@@ -114,6 +120,8 @@
     <Compile Include="Services\DestinationService.cs" />
     <Compile Include="Services\IHotelService.cs" />
     <Compile Include="Services\IDestinationService.cs" />
+    <Compile Include="Services\ISearchService.cs" />
+    <Compile Include="Services\SearchService.cs" />
     <Compile Include="Settings\QuestionFieldEditorEvents.cs" />
     <Compile Include="Settings\QuestionFieldSettings.cs" />
   </ItemGroup>
@@ -155,6 +163,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Fields\Question.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\GoogleMap.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts\SearchWidget.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

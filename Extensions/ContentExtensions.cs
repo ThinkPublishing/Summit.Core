@@ -1,0 +1,60 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using Orchard.ContentManagement;
+
+namespace Summit.Core.Extensions {
+    public static class ContentExtensions {
+        /// <summary>The as.</summary>
+        /// <param name="content">The content.</param>
+        /// <param name="partDefinitionName">The part definition name.</param>
+        /// <returns>The Orchard.ContentManagement.IContent.</returns>
+        public static ContentPart As(this IContent content, string partDefinitionName) {
+            return content.ContentItem.Parts.FirstOrDefault(p => p.PartDefinition.Name == partDefinitionName);
+        }
+
+        public static bool Has(this IContent content, string partDefinitionName) {
+            return content.ContentItem.Parts.Any(p => p.PartDefinition.Name == partDefinitionName);
+        }
+
+        /// <summary>The get property.</summary>
+        /// <param name="content">The content.</param>
+        /// <param name="propertyName">The property name.</param>
+        /// <returns>The System.Object.</returns>
+        public static object GetProperty(this IContent content, string propertyName) {
+            return content.GetType().GetProperty(propertyName).GetValue(content, null);
+        }
+
+        /// <summary>The get field value.</summary>
+        /// <param name="content">The content.</param>
+        /// <param name="fieldName">The field name.</param>
+        /// <param name="fieldProperty">The field property.</param>
+        /// <returns>The System.String.</returns>
+        public static string GetFieldValue(this IContent content, string fieldName, string fieldProperty) {
+            return content.GetFieldValue(null, fieldName, fieldProperty);
+        }
+
+        /// <summary>The get field value.</summary>
+        /// <param name="content">The content.</param>
+        /// <param name="partDefinitionName">The part definition name.</param>
+        /// <param name="fieldName">The field name.</param>
+        /// <param name="fieldProperty">The field property.</param>
+        /// <returns>The System.String.</returns>
+        public static string GetFieldValue(this IContent content, string partDefinitionName, string fieldName, string fieldProperty) {
+            var val = string.Empty;
+            var part = string.IsNullOrEmpty(partDefinitionName) ? content : content.As(partDefinitionName);
+
+            if (part != null) {
+                var cast = (ContentPart) part;
+                var field = cast.Fields.FirstOrDefault(x => x.Name == fieldName);
+
+                if (field != null) {
+                    val = field.Storage.Get<string>(fieldProperty);
+                }
+            }
+
+            return val;
+        }
+    }
+}

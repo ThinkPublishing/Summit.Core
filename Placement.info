@@ -16,4 +16,7 @@
             <Place Fields_Common_Text-Postcode="-"/>
         </Match>
     </Match>
+    
+    <!--widgets-->
+    <Place Parts_SearchWidget="Content" />
 </Placement>

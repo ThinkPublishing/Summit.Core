@@ -1,82 +1,52 @@
-﻿@{
-    if (Model.Title != null) {
-        Layout.Title = Model.Title;
-    }
-
-    Script.Require("gmap3").AtFoot();
-    var address = new List<string> {Model.ContentItem.LocationPart.Address.Value, Model.ContentItem.LocationPart.City.Value, Model.ContentItem.LocationPart.ProvinceState.Value, Model.ContentItem.LocationPart.Country.Value, Model.ContentItem.LocationPart.Postcode.Value};
-    var addressjson = string.Concat("{address:\"", string.Join(",", address), "\"}");
+﻿@using Summit.Core.Extensions
+@{
+    var title = Model.ContentItem.TitlePart.Title;
     var conceirge = Model.ContentItem.HotelPart.Conceirge.ContentItems[0];
     var location = Model.ContentItem.HotelPart.DestinationPart.ContentItem.TitlePart.Title;
 }
 
-@if (conceirge != null) {
-    <div id="conceirge">
-        <ul>
-            <li>Name @conceirge.TitlePart.Title</li>
-            @foreach (var field in conceirge.ConceirgePart.Fields) 
-            {
-                if (field.FieldDefinition.Name == "TextField") {
-                    <li>@field.DisplayName : @field.Value</li>
+<article style="width: 400px; float: left;">
+    <h1>Welcome to the @title, @location</h1>
+
+    @if (conceirge != null) {
+        <div id="conceirge">
+            <img src="@Url.Content(conceirge.ConceirgePart.Image.Url)" alt="" />
+
+            <ul>
+                <li>Name @conceirge.TitlePart.Title</li>
+                @foreach (var field in conceirge.ConceirgePart.Fields) 
+                {
+                    if (field.FieldDefinition.Name == "TextField") {
+                        <li>@field.DisplayName : @field.Value</li>
+                    }
                 }
-            }
-        </ul>
-    </div>
-    
-    <div id="conceirge-questions">
-          @foreach (var field in conceirge.ConceirgePart.Fields) 
-            {
-                if (field.FieldDefinition.Name == "QuestionField") {
-                    <h4>@field.PartFieldDefinition.Settings["QuestionFieldSettings.Question1"].Replace("[location]", location)</h4> 
-                    <p>@field.Value</p>
-                }
-            }
-    </div>
-}
-
-@using (Script.Foot())
-{
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#destination-map").gmap3({
-                    map: {
-                        options: {
-                            maxZoom: 14
-                        }
-                    },
-                    marker: {
-                        values: [@Html.Raw(addressjson)]
-                }
-            },
-            "autofit");
-        });
-    </script>
-}
-
-<div id="destination-map" style="width: 400px; height: 300px;"></div>
-
-<div id="book">
-    <h4>Book with @Model.ContentItem.TitlePart.Title</h4>
-    <a href="@Model.ContentItem.HotelPart.ReservationUrl.Value">
-        Book Now
-    </a>
-</div>
-
-
----------------------------------------------------
-<article class="content-Model">
-    <header>
-        @Display(Model.Header)
-        @if (Model.Meta != null) {
-        <div class="metadata">
-            @Display(Model.Meta)
+            </ul>
         </div>
-        }
-    </header>
-    @Display(Model.Content)
-    @if(Model.Footer != null) {
-    <footer>
-        @Display(Model.Footer)
-    </footer>
+    
+        <div id="conceirge-questions">
+              @foreach (var field in conceirge.ConceirgePart.Fields) 
+                {
+                    if (field.FieldDefinition.Name == "QuestionField") {
+                        <h4>@field.PartFieldDefinition.Settings["QuestionFieldSettings.Question1"].Replace("[location]", location)</h4> 
+                        <p>@field.Value</p>
+                    }
+                }
+        </div>
     }
 </article>
+
+<aside>
+    <img src="@Url.Content(Model.ContentItem.HotelPart.Logo.Url)" alt="@title" />
+
+     <p>@Model.ContentItem.HotelPart.Quote.Value</p>
+     @Display.GoogleMap(Markers: HtmlHelperMapExtensions.ToMapJson(Html, Model, false), Width: "320", Height: "260")
+
+    
+
+    <div id="book">
+        <h4>Book with @title</h4>
+        <a href="@Model.ContentItem.HotelPart.ReservationUrl.Value">
+            Book Now
+        </a>
+    </div>
+</aside>

@@ -14,10 +14,13 @@ namespace Summit.Core {
 
 
         public int Create() {
+            const string allowedImageExtensions = "jpg|jpeg|png|gif";
+
             ContentDefinitionManager.AlterTypeDefinition("Destination",
              cfg => cfg
                  .WithPart("CommonPart", p => p
-                     .WithSetting("DateEditorSettings.ShowDateEditor", "false"))
+                     .WithSetting("DateEditorSettings.ShowDateEditor", "false")
+                     .WithSetting("OwnerEditorSettings.ShowOwnerEditor", "false"))
                  .WithPart("TitlePart")
                  .WithPart("AutoroutePart", builder => builder
                      .WithSetting("AutorouteSettings.AllowCustomPattern", "true")
@@ -34,7 +37,7 @@ namespace Summit.Core {
                             .WithField("StrangestRequest", field => field.OfType("TextField").WithDisplayName("Strangest request"))
                             .WithField("FavouriteMoment", field => field.OfType("TextField").WithDisplayName("Favourite moment"))
                             .WithField("FavouriteRoom", field => field.OfType("TextField").WithDisplayName("Favourite room in the hotel"))
-                            .WithField("Image", field => field.OfType("ImageField"))
+                            .WithField("Image", field => field.OfType("MediaPickerField").WithSetting("MediaPickerField.Required", "true").WithSetting("MediaPickerField.AllowedExtensions", allowedImageExtensions))
                             .WithField("Active", field => field.OfType("BooleanField").WithDisplayName("Active"))
                             .WithField("Question1", field => field.OfType("QuestionField").WithSetting("QuestionFieldSettings.Question1", "Three words to describe the location").WithSetting("QuestionFieldSettings.Question2", "Three words to describe the location"))
                             .WithField("Question2", field => field.OfType("QuestionField").WithSetting("QuestionFieldSettings.Question1", "What’s the first thing anyone new to [location] should do").WithSetting("QuestionFieldSettings.Question2", "What’s the first thing anyone new to [location] should do"))
@@ -56,7 +59,8 @@ namespace Summit.Core {
             ContentDefinitionManager.AlterTypeDefinition("Conceirge",
               cfg => cfg
                   .WithPart("CommonPart", p => p
-                      .WithSetting("DateEditorSettings.ShowDateEditor", "false"))
+                      .WithSetting("DateEditorSettings.ShowDateEditor", "false")
+                      .WithSetting("OwnerEditorSettings.ShowOwnerEditor", "false"))
                   .WithPart("TitlePart")
                   .WithPart("ConceirgePart")
               );
@@ -66,8 +70,8 @@ namespace Summit.Core {
 
             ContentDefinitionManager.AlterPartDefinition("HotelPart",
                 cfg => cfg
-                        .WithField("Description", field => field.OfType("TextField").WithDisplayName("Quote").WithSetting("TextFieldSettings.Flavor", "Html"))
-                        .WithField("Logo", field => field.OfType("ImageField").WithDisplayName("Logo"))
+                        .WithField("Description", field => field.OfType("TextField").WithDisplayName("Description").WithSetting("TextFieldSettings.Flavor", "Html"))
+                        .WithField("Logo", field => field.OfType("MediaPickerField").WithSetting("MediaPickerField.Required", "true").WithSetting("MediaPickerField.AllowedExtensions", allowedImageExtensions))
                         .WithField("Phone", field => field.OfType("TextField").WithDisplayName("Phone Number"))
                         .WithField("ReservationUrl", field => field.OfType("TextField").WithDisplayName("Reservation Url"))
                         .WithField("Active", field => field.OfType("BooleanField").WithDisplayName("Active"))
@@ -79,6 +83,7 @@ namespace Summit.Core {
 
             ContentDefinitionManager.AlterPartDefinition("LocationPart",
                 cfg => cfg
+                        .WithField("Quote", field => field.OfType("TextField").WithDisplayName("Quote").WithSetting("TextFieldSettings.Flavor", "Textarea"))
                         .WithField("Address", field => field.OfType("TextField").WithDisplayName("Address"))
                         .WithField("City", field => field.OfType("TextField").WithDisplayName("City"))
                         .WithField("ProvinceState", field => field.OfType("TextField").WithDisplayName("Province or State"))
@@ -90,14 +95,14 @@ namespace Summit.Core {
                 cfg => cfg
                         .WithField("Region", field => field.OfType("TextField").WithDisplayName("Region"))
                         .WithField("Country", field => field.OfType("TextField").WithDisplayName("Country"))
-                        .WithField("Logo", field => field.OfType("ImageField").WithDisplayName("Image"))
+                        .WithField("Logo", field => field.OfType("MediaPickerField").WithSetting("MediaPickerField.Required", "true").WithSetting("MediaPickerField.AllowedExtensions", allowedImageExtensions))
                         );
 
             ContentDefinitionManager.AlterTypeDefinition("Hotel",
                  cfg => cfg
                      .WithPart("CommonPart", p => p
-                        .WithSetting("DateEditorSettings.ShowDateEditor", "false"))
-                     .WithPart("PublishLaterPart")
+                        .WithSetting("DateEditorSettings.ShowDateEditor", "false")
+                        .WithSetting("OwnerEditorSettings.ShowOwnerEditor", "false"))
                      .WithPart("TitlePart")
                      .WithPart("AutoroutePart", builder => builder
                          .WithSetting("AutorouteSettings.AllowCustomPattern", "true")
@@ -109,8 +114,14 @@ namespace Summit.Core {
                      .Draftable()
                  );
 
-         
-            
+
+            ContentDefinitionManager.AlterTypeDefinition("SearchWidget",
+                cfg => cfg
+                    .WithPart("SearchWidgetPart")
+                    .WithPart("CommonPart")
+                    .WithPart("WidgetPart")
+                    .WithSetting("Stereotype", "Widget")
+                );
 
             return 1;
         }

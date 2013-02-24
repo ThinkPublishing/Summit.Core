@@ -9,6 +9,9 @@ namespace Summit.Core {
             // map stuff
             manifest.DefineScript("GoogleMapsV3").SetCdn("http://maps.google.com/maps/api/js?sensor=true");
             manifest.DefineScript("gmap3").SetUrl("gmap3.min.js").SetDependencies(new [] { "jQuery", "GoogleMapsV3" });
+
+            //search stuff
+            manifest.DefineScript("search-widget").SetUrl("search-widget.min.js").SetDependencies(new[] { "jQuery", "jQueryUI" });
         }
     }
 }

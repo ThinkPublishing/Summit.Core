@@ -11,7 +11,7 @@ namespace Summit.Core {
             manifest.DefineScript("gmap3").SetUrl("gmap3.min.js").SetDependencies(new [] { "jQuery", "GoogleMapsV3" });
 
             //search stuff
-            manifest.DefineScript("search-widget").SetUrl("search-widget.min.js").SetDependencies(new[] { "jQuery", "jQueryUI" });
+            manifest.DefineScript("search-widget").SetUrl("search-widget.js").SetDependencies(new[] { "jQuery", "jQueryUI" });
         }
     }
 }

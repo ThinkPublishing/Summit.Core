@@ -11,7 +11,7 @@ $('.search-widget').autocomplete(
                 });
         },
         select: function (event, ui) {
-            this.val(ui.item.val);
+            $(this).val(ui.item.value);
             window.location = ui.item.value;
             return false;
         },

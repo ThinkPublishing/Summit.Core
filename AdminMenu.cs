@@ -19,7 +19,7 @@ namespace Summit.Core {
 
         public void GetNavigation(NavigationBuilder builder) {
             builder.AddImageSet("summit")
-                .Add(T("Destination"), "1.5", BuildMenu);
+                .Add(T("Summit"), "1.5", BuildMenu);
         }
 
         private void BuildMenu(NavigationItemBuilder menu) {

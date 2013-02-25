@@ -7,6 +7,8 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Orchard.Mvc;
+
 namespace Summit.Core.Controllers
 {
     using System;
@@ -35,14 +37,15 @@ namespace Summit.Core.Controllers
     [Admin]
     public class HotelAdminController : Controller, IUpdateModel
     {
+        private readonly IOrchardServices orchardServices;
         private readonly IDestinationService destinationService;
-
         private readonly IHotelService hotelService;
 
         public HotelAdminController(
-            IOrchardServices services, IDestinationService destinationService, IHotelService hotelService)
+            IOrchardServices services, IOrchardServices orchardServices, IDestinationService destinationService, IHotelService hotelService)
         {
             Services = services;
+            this.orchardServices = orchardServices;
             this.destinationService = destinationService;
             this.hotelService = hotelService;
             T = NullLocalizer.Instance;
@@ -52,19 +55,27 @@ namespace Summit.Core.Controllers
 
         public Localizer T { get; set; }
 
-        public ActionResult Create(int destinationId)
+        public ActionResult Create(int destinationId, int? conceirgeId, bool noConceirge = false)
         {
-
             var destination = destinationService.Get(destinationId, VersionOptions.Latest).As<DestinationPart>();
 
             if (destination == null) return HttpNotFound();
 
-            var blogPost = this.Services.ContentManager.New<HotelPart>("Hotel");
-            blogPost.DestinationPart = destination;
+            if (!conceirgeId.HasValue && !noConceirge)
+            {
+                return new ShapeResult(this, this.orchardServices.New.Parts_ConceirgePrompt(Destination: destination));
+            }
+
+            var hotel = this.Services.ContentManager.New<HotelPart>("Hotel");
+            hotel.DestinationPart = destination;
+
+            if (conceirgeId.HasValue) {
+                hotel.SetFieldValue("Conceirge", "", "{" + conceirgeId.Value + "}");
+            }
 
             if (!Services.Authorizer.Authorize(Permissions.EditHotel, destination, T("Not allowed to create a hotel"))) return new HttpUnauthorizedResult();
 
-            dynamic model = Services.ContentManager.BuildEditor(blogPost);
+            dynamic model = Services.ContentManager.BuildEditor(hotel);
 
             // Casting to avoid invalid (under medium trust) reflection over the protected View method and force a static invocation.
             return View((object)model);

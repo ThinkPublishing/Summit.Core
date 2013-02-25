@@ -8,6 +8,8 @@ using Orchard.ContentManagement;
 namespace Summit.Core.Services
 {
     public interface ISearchService : IDependency {
-        IEnumerable<IContent> Search(string snippet);
+        int SearchCount(string search);
+        IEnumerable<IContent> Search(string search, int? skip, int? count);
+        IEnumerable<IContent> SearchBySnippet(string snippet);
     }
 }

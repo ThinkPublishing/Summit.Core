@@ -33,7 +33,22 @@ namespace Summit.Core
                         {
                             Route =
                                 new Route(
-                                "Search/{snippet}",
+                                "Search",
+                                new RouteValueDictionary
+                                    {
+                                        { "area", "Summit.Core" },
+                                        { "controller", "Search" },
+                                        { "action", "Index" }
+                                    },
+                                new RouteValueDictionary(),
+                                new RouteValueDictionary { { "area", "Summit.Core" } },
+                                new MvcRouteHandler())
+                        },
+                    new RouteDescriptor
+                        {
+                            Route =
+                                new Route(
+                                "SearchBySnippet/{snippet}",
                                 new RouteValueDictionary
                                     {
                                         { "area", "Summit.Core" },
@@ -174,6 +189,36 @@ namespace Summit.Core
                                         { "area", "Summit.Core" },
                                         { "controller", "HotelAdmin" },
                                         { "action", "Unpublish" }
+                                    },
+                                new RouteValueDictionary(),
+                                new RouteValueDictionary { { "area", "Summit.Core" } },
+                                new MvcRouteHandler())
+                        },
+                    new RouteDescriptor
+                        {
+                            Route =
+                                new Route(
+                                "Admin/Conceirges/Create",
+                                new RouteValueDictionary
+                                    {
+                                        { "area", "Summit.Core" },
+                                        { "controller", "ConceirgeAdmin" },
+                                        { "action", "Create" }
+                                    },
+                                new RouteValueDictionary(),
+                                new RouteValueDictionary { { "area", "Summit.Core" } },
+                                new MvcRouteHandler())
+                        },
+                    new RouteDescriptor
+                        {
+                            Route =
+                                new Route(
+                                "Admin/Conceirges/Create/{destinationId}",
+                                new RouteValueDictionary
+                                    {
+                                        { "area", "Summit.Core" },
+                                        { "controller", "ConceirgeAdmin" },
+                                        { "action", "Create" }
                                     },
                                 new RouteValueDictionary(),
                                 new RouteValueDictionary { { "area", "Summit.Core" } },

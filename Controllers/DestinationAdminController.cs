@@ -200,17 +200,17 @@ namespace Summit.Core.Controllers
                 this.hotelService.Get(destinationPart, pager.GetStartIndex(), pager.PageSize, VersionOptions.Latest).ToArray();
             var hotelsShapes = hotels.Select(bp => this.contentManager.BuildDisplay(bp, "SummaryAdmin")).ToArray();
 
-            dynamic blog = Services.ContentManager.BuildDisplay(destinationPart, "DetailAdmin");
+            dynamic destinationShape = Services.ContentManager.BuildDisplay(destinationPart, "DetailAdmin");
 
             var list = Shape.List();
             list.AddRange(hotelsShapes);
-            blog.Content.Add(Shape.Parts_Destinations_Hotel_ListAdmin(ContentItems: list), "5");
+            destinationShape.Content.Add(Shape.Parts_Destinations_Hotel_ListAdmin(ContentItems: list), "5");
 
             var totalItemCount = this.hotelService.HotelCount(destinationPart, VersionOptions.Latest);
-            blog.Content.Add(Shape.Pager(pager).TotalItemCount(totalItemCount), "Content:after");
+            destinationShape.Content.Add(Shape.Pager(pager).TotalItemCount(totalItemCount), "Content:after");
 
             // Casting to avoid invalid (under medium trust) reflection over the protected View method and force a static invocation.
-            return View((object)blog);
+            return View((object)destinationShape);
         }
 
         bool IUpdateModel.TryUpdateModel<TModel>(

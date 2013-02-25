@@ -2,19 +2,32 @@
     <!--fields-->
     <Place Fields_Question_Edit="Content:2.4"/>
     <Place Fields_Question="Content:after"/>
-   
+
+    <Match ContentType="Destination">
+        <Match DisplayType="DetailAdmin">
+            <Place Fields_Common_Text="-" />
+            <Place Fields_MediaPicker="-"/>
+        </Match>
+    </Match>
+
+
     <!--hotel-->
     <Match ContentType="Hotel">
         <Match DisplayType="Detail">
             <Place Parts_Title="-" />
-            <Place Parts_Common_Metadata="-" />
-            <Place Fields_Common_Text-Description="-"/>
-            <Place Fields_Common_Text-Address="-"/>
-            <Place Fields_Common_Text-City="-"/>
-            <Place Fields_Common_Text-ProvinceState="-"/>
-            <Place Fields_Common_Text-Country="-"/>
-            <Place Fields_Common_Text-Postcode="-"/>
         </Match>
+
+        <Match DisplayType="Summary">
+            <Place Parts_Common_Metadata_Summary="-" />
+        </Match>
+
+        <Match DisplayType="SummaryAdmin">
+            <Place Fields_ContentPicker_SummaryAdmin="-"/>
+        </Match>
+
+        <Place Parts_Common_Metadata="-" />
+        <Place Fields_Common_Text="-" />
+        <Place Fields_Boolean="-" />
     </Match>
     
     <!--widgets-->

@@ -62,6 +62,18 @@ namespace Summit.Core.Extensions
                 "Create", "HotelAdmin", new { destinationId = destinationPart.Id, area = "Summit.Core" });
         }
 
+        public static string HotelCreate(this UrlHelper urlHelper, DestinationPart destinationPart, int? conceirgeId)
+        {
+            return urlHelper.Action(
+                "Create", "HotelAdmin", new { destinationId = destinationPart.Id, conceirgeId = conceirgeId, area = "Summit.Core" });
+        }
+
+        public static string HotelCreate(this UrlHelper urlHelper, DestinationPart destinationPart, int? conceirgeId, bool noConceirge)
+        {
+            return urlHelper.Action(
+                "Create", "HotelAdmin", new { destinationId = destinationPart.Id, conceirgeId, noConceirge, area = "Summit.Core" });
+        }
+
         public static string HotelEdit(this UrlHelper urlHelper, HotelPart hotelPart)
         {
             return urlHelper.Action(
@@ -92,6 +104,12 @@ namespace Summit.Core.Extensions
                 "Unpublish",
                 "HotelAdmin",
                 new { destinationId = hotelPart.DestinationPart.Id, hotelId = hotelPart.Id, area = "Summit.Core" });
+        }
+
+        public static string ConceirgeCreate(this UrlHelper urlHelper, DestinationPart destinationPart)
+        {
+            return urlHelper.Action(
+                "Create", "ConceirgeAdmin", new { destinationId = destinationPart.Id, area = "Summit.Core" });
         }
     }
 }

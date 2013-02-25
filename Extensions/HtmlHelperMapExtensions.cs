@@ -19,6 +19,7 @@ namespace Summit.Core.Extensions {
                 var contentItem = (IContent) content.ContentItem;
 
                 var addressFields = new List<string> {
+                    locationPart.Address.Value,
                     locationPart.City.Value,
                     locationPart.ProvinceState.Value,
                     locationPart.Country.Value,

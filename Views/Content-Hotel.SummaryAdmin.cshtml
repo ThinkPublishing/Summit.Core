@@ -16,9 +16,7 @@
         <div class="metadata">@Display(Model.Meta)</div>
         }
     </div>
-    <div class="related">
-        @Display(Model.Actions)
-        
+    <div class="related">        
         @if (contentItem.HasPublished()) {
             @Html.ItemDisplayLink(T("View").Text, contentItem)
             @T(" | ")

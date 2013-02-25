@@ -2,7 +2,7 @@
 $(document).ready(function() {
     $('.search-widget').autocomplete({
             source: function(request, response) {
-                $.getJSON('/search/' + request.term, null,
+                $.getJSON('/searchbysnippet/' + request.term, null,
                     function(data) {
                         response($.map(data, function(item) {
                             return { label: item.Title, value: item.Path };
@@ -10,7 +10,8 @@ $(document).ready(function() {
                     });
             },
             select: function(event, ui) {
-                $(this).val(ui.item.value);
+                $(this).val(ui.item.label);
+                $(this).prop("readonly", true);
                 window.location = ui.item.value;
                 return false;
             },

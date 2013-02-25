@@ -5,13 +5,13 @@ using Orchard.Projections.Models;
 using Orchard.Projections.Services;
 
 namespace Summit.Core {
-    public class UsersDataMigration : DataMigrationImpl {
+    public class Migration : DataMigrationImpl {
 
         private readonly IQueryService queryService;
-        public UsersDataMigration(IQueryService queryService) {
+        public Migration(IQueryService queryService)
+        {
             this.queryService = queryService;
         }
-
 
         public int Create() {
             const string allowedImageExtensions = "jpg|jpeg|png|gif";
@@ -67,7 +67,6 @@ namespace Summit.Core {
 
             var query = this.queryService.CreateQuery("List of Active Conceirges");
            
-
             ContentDefinitionManager.AlterPartDefinition("HotelPart",
                 cfg => cfg
                         .WithField("Description", field => field.OfType("TextField").WithDisplayName("Description").WithSetting("TextFieldSettings.Flavor", "Html"))

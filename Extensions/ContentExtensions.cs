@@ -56,5 +56,27 @@ namespace Summit.Core.Extensions {
 
             return val;
         }
+
+        public static void SetFieldValue(this IContent content, string fieldName, string fieldProperty, string value)
+        {
+             content.SetFieldValue(null, fieldName, fieldProperty, value);
+        }
+
+        public static void SetFieldValue(this IContent content, string partDefinitionName, string fieldName, string fieldProperty, string value)
+        {
+            var val = string.Empty;
+            var part = string.IsNullOrEmpty(partDefinitionName) ? content : content.As(partDefinitionName);
+
+            if (part != null)
+            {
+                var cast = (ContentPart)part;
+                var field = cast.Fields.FirstOrDefault(x => x.Name == fieldName);
+
+                if (field != null)
+                {
+                    field.Storage.Set<string>(fieldProperty, value);
+                }
+            }
+        }
     }
 }

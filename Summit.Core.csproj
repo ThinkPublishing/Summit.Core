@@ -92,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminMenu.cs" />
+    <Compile Include="Controllers\ConceirgeAdminController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\DestinationAdminController.cs" />
     <Compile Include="Controllers\DestinationController.cs" />
@@ -172,6 +173,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Parts\SearchResults.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Content-Hotel.Summary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts\ConceirgePrompt.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ConceirgeAdmin\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ConceirgeAdmin\Edit.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

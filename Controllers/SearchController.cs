@@ -8,6 +8,8 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using Orchard.ContentManagement.Aspects;
+using Orchard.Mvc;
+using Orchard.Themes;
 
 namespace Summit.Core.Controllers {
     using System.Linq;
@@ -34,6 +36,12 @@ namespace Summit.Core.Controllers {
 
         private dynamic Shape { get; set; }
         private Localizer T { get; set; }
+
+        [Themed]
+        public ShapeResult Index(string search) {
+            var shape = Shape.Parts_SearchResults();
+            return new ShapeResult(this, shape);
+        }
 
         public JsonResult Find(string snippet) {
             return this.Json(this.searchService.Search(snippet).Select(x => new { x.Id, x.As<ITitleAspect>().Title, Path = string.Concat("/", x.As<IAliasAspect>().Path) }), JsonRequestBehavior.AllowGet);

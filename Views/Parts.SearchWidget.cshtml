@@ -1,0 +1,8 @@
+﻿@{
+    Script.Require("search-widget").AtFoot();
+    Style.Require("jQueryUI_Orchard").AtFoot();
+}
+
+@using (Html.BeginForm("Index", "Search", new { Area = "Summit.Core" }, FormMethod.Get)) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+    @Html.TextBox("search", null, new { @class = "search-widget", placeholder = "Where do you want to go today?"})
+}                                                                                               

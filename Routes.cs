@@ -238,21 +238,6 @@ namespace Summit.Core
                                 new RouteValueDictionary(),
                                 new RouteValueDictionary { { "area", "Summit.Core" } },
                                 new MvcRouteHandler())
-                        },
-                    new RouteDescriptor
-                        {
-                            Route =
-                                new Route(
-                                "Destination",
-                                new RouteValueDictionary
-                                    {
-                                        { "area", "Summit.Core" }, 
-                                        { "controller", "Destination" }, 
-                                        { "action", "List" }
-                                    },
-                                new RouteValueDictionary(),
-                                new RouteValueDictionary { { "area", "Summit.Core" } },
-                                new MvcRouteHandler())
                         }
                 };
         }

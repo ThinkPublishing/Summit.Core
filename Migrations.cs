@@ -7,12 +7,6 @@ using Orchard.Projections.Services;
 namespace Summit.Core {
     public class Migration : DataMigrationImpl {
 
-        private readonly IQueryService queryService;
-        public Migration(IQueryService queryService)
-        {
-            this.queryService = queryService;
-        }
-
         public int Create() {
             const string allowedImageExtensions = "jpg|jpeg|png|gif";
 
@@ -23,8 +17,8 @@ namespace Summit.Core {
                      .WithSetting("OwnerEditorSettings.ShowOwnerEditor", "false"))
                  .WithPart("TitlePart")
                  .WithPart("AutoroutePart", builder => builder
-                     .WithSetting("AutorouteSettings.AllowCustomPattern", "true")
-                     .WithSetting("AutorouteSettings.AutomaticAdjustmentOnEdit", "false")
+                     .WithSetting("AutorouteSettings.AllowCustomPattern", "false")
+                     .WithSetting("AutorouteSettings.AutomaticAdjustmentOnEdit", "true")
                      .WithSetting("AutorouteSettings.PatternDefinitions", "[{Name:'Title', Pattern: '{Content.Slug}', Description: 'my-destination'}]")
                      .WithSetting("AutorouteSettings.DefaultPatternIndex", "0"))
                  .WithPart("DestinationPart")
@@ -37,7 +31,7 @@ namespace Summit.Core {
                             .WithField("StrangestRequest", field => field.OfType("TextField").WithDisplayName("Strangest request"))
                             .WithField("FavouriteMoment", field => field.OfType("TextField").WithDisplayName("Favourite moment"))
                             .WithField("FavouriteRoom", field => field.OfType("TextField").WithDisplayName("Favourite room in the hotel"))
-                            .WithField("Image", field => field.OfType("MediaPickerField").WithSetting("MediaPickerField.Required", "true").WithSetting("MediaPickerField.AllowedExtensions", allowedImageExtensions))
+                            .WithField("Image", field => field.OfType("MediaPickerField").WithSetting("MediaPickerFieldSettings.Required", "true").WithSetting("MediaPickerFieldSettings.AllowedExtensions", allowedImageExtensions))
                             .WithField("Active", field => field.OfType("BooleanField").WithDisplayName("Active"))
                             .WithField("Question1", field => field.OfType("QuestionField").WithSetting("QuestionFieldSettings.Question1", "Three words to describe the location").WithSetting("QuestionFieldSettings.Question2", "Three words to describe the location"))
                             .WithField("Question2", field => field.OfType("QuestionField").WithSetting("QuestionFieldSettings.Question1", "What’s the first thing anyone new to [location] should do").WithSetting("QuestionFieldSettings.Question2", "What’s the first thing anyone new to [location] should do"))
@@ -64,37 +58,37 @@ namespace Summit.Core {
                   .WithPart("TitlePart")
                   .WithPart("ConceirgePart")
               );
-
-            var query = this.queryService.CreateQuery("List of Active Conceirges");
            
             ContentDefinitionManager.AlterPartDefinition("HotelPart",
                 cfg => cfg
                         .WithField("Description", field => field.OfType("TextField").WithDisplayName("Description").WithSetting("TextFieldSettings.Flavor", "Html"))
-                        .WithField("Logo", field => field.OfType("MediaPickerField").WithSetting("MediaPickerField.Required", "true").WithSetting("MediaPickerField.AllowedExtensions", allowedImageExtensions))
+                        .WithField("Logo", field => field.OfType("MediaPickerField").WithSetting("MediaPickerFieldSettings.Required", "true").WithSetting("MediaPickerFieldSettings.AllowedExtensions", allowedImageExtensions))
                         .WithField("Phone", field => field.OfType("TextField").WithDisplayName("Phone Number"))
                         .WithField("ReservationUrl", field => field.OfType("TextField").WithDisplayName("Reservation Url"))
-                        .WithField("Active", field => field.OfType("BooleanField").WithDisplayName("Active"))
+                        .WithField("Status", field => field.OfType("EnumerationField").WithDisplayName("Status").WithSetting("EnumerationFieldSettings.Options", "Active\r\nDecommisioned"))
                         .WithField("Conceirge", field => field.OfType("ContentPickerField")
-                                .WithSetting("ContentPickerFieldSettings.QueryId", query.Id.ToString())
                                 .WithSetting("ContentPickerFieldSettings.Required", "true")
                                 .WithSetting("ContentPickerFieldSettings.Multiple", "false"))
                         );
 
             ContentDefinitionManager.AlterPartDefinition("LocationPart",
                 cfg => cfg
-                        .WithField("Quote", field => field.OfType("TextField").WithDisplayName("Quote").WithSetting("TextFieldSettings.Flavor", "Textarea"))
-                        .WithField("Address", field => field.OfType("TextField").WithDisplayName("Address"))
+                        .WithField("Address", field => field.OfType("TextField").WithDisplayName("Address").WithSetting("TextField.Required", "true"))
                         .WithField("City", field => field.OfType("TextField").WithDisplayName("City"))
                         .WithField("ProvinceState", field => field.OfType("TextField").WithDisplayName("Province or State"))
-                        .WithField("Country", field => field.OfType("TextField").WithDisplayName("Country"))
-                        .WithField("Postcode", field => field.OfType("TextField").WithDisplayName("Postcode"))
+                        .WithField("Country", field => field.OfType("TextField").WithDisplayName("Country").WithSetting("TextField.Required", "true"))
+                        .WithField("Postcode", field => field.OfType("TextField").WithDisplayName("Postcode/Zipcode").WithSetting("TextField.Required", "true"))
                         );
 
+
+            const string destinationRegions =
+            "Asia & Pacific\r\nCaribbean\r\nCentral & South America\rEurope\r\nMiddle East & Africa\r\nNorth America - Canada\r\nNorth America - Mexico\r\nNorth America - USA";
             ContentDefinitionManager.AlterPartDefinition("DestinationPart",
                 cfg => cfg
-                        .WithField("Region", field => field.OfType("TextField").WithDisplayName("Region"))
-                        .WithField("Country", field => field.OfType("TextField").WithDisplayName("Country"))
-                        .WithField("Logo", field => field.OfType("MediaPickerField").WithSetting("MediaPickerField.Required", "true").WithSetting("MediaPickerField.AllowedExtensions", allowedImageExtensions))
+                        .WithField("Quote", field => field.OfType("TextField").WithDisplayName("Quote").WithSetting("TextFieldSettings.Flavor", "Html"))
+                        .WithField("Region", field => field.OfType("EnumerationField").WithDisplayName("Region").WithSetting("EnumerationFieldSettings.Options", destinationRegions).WithSetting("EnumerationFieldSettings.Required", "true"))
+                        .WithField("Country", field => field.OfType("TextField").WithDisplayName("Country").WithSetting("TextField.Required", "true"))
+                        .WithField("Logo", field => field.OfType("MediaPickerField").WithSetting("MediaPickerFieldSettings.Required", "true").WithSetting("MediaPickerFieldSettings.AllowedExtensions", allowedImageExtensions))
                         );
 
             ContentDefinitionManager.AlterTypeDefinition("Hotel",
@@ -104,8 +98,8 @@ namespace Summit.Core {
                         .WithSetting("OwnerEditorSettings.ShowOwnerEditor", "false"))
                      .WithPart("TitlePart")
                      .WithPart("AutoroutePart", builder => builder
-                         .WithSetting("AutorouteSettings.AllowCustomPattern", "true")
-                         .WithSetting("AutorouteSettings.AutomaticAdjustmentOnEdit", "false")
+                         .WithSetting("AutorouteSettings.AllowCustomPattern", "false")
+                         .WithSetting("AutorouteSettings.AutomaticAdjustmentOnEdit", "true")
                          .WithSetting("AutorouteSettings.PatternDefinitions", "[{Name:'Title', Pattern: '{Content.Container.Path}/{Content.Slug}', Description: 'destination/my-hotel'}]")
                          .WithSetting("AutorouteSettings.DefaultPatternIndex", "0"))
                      .WithPart("HotelPart")

@@ -65,6 +65,10 @@
     <Content Include="Content\Admin\images\online.gif" />
     <Content Include="Content\Admin\images\published.gif" />
     <Content Include="Content\Admin\images\scheduled.gif" />
+    <Content Include="Imports\summit.setup.xml" />
+    <Content Include="Recipes\summit.recipe.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Scripts\gmap3.min.js" />
     <Content Include="Scripts\search-widget.js" />
     <Content Include="Styles\menu.summit-admin.css" />
@@ -169,16 +173,16 @@
     <Content Include="Views\GoogleMap.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Parts\SearchWidget.cshtml" />
+    <Content Include="Views\Parts.SearchWidget.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Parts\SearchResults.cshtml" />
+    <Content Include="Views\Parts.SearchResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Content-Hotel.Summary.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Parts\ConceirgePrompt.cshtml" />
+    <Content Include="Views\Parts.ConceirgePrompt.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ConceirgeAdmin\Create.cshtml" />

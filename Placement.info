@@ -1,4 +1,7 @@
 ﻿<Placement>
+   <!-- general-->
+    <Place Parts_Common_Metadata="-" />
+    
     <!--fields-->
     <Place Fields_Question_Edit="Content:2.4"/>
     <Place Fields_Question="Content:after"/>
@@ -10,6 +13,11 @@
         </Match>
     </Match>
 
+    <Match ContentType="Page">
+        <Match Path="/">
+            <Place Parts_Title="-" />
+        </Match>
+    </Match>
 
     <!--hotel-->
     <Match ContentType="Hotel">

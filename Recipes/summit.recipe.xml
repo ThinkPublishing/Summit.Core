@@ -1,0 +1,37 @@
+﻿<?xml version="1.0"?>
+<Orchard>
+  <Recipe>
+    <Name>Summit</Name>
+    <Description>A recipe for summit.</Description>
+    <Author>Carl Woodhouse</Author>
+    <WebSite>http://www.carlwoodhouse.com</WebSite>
+    <Tags>developer</Tags>
+    <Version>1.0</Version>
+  </Recipe>
+
+  <Feature disable="Feeds, Containers" 
+           enable="Orchard.jQuery,Orchard.Alias,Orchard.Autoroute,TinyMce,
+                   Orchard.Widgets,Orchard.Scripting,Orchard.Scripting.Lightweight,
+                   Summit.Core,TheThemeMachine" />
+  
+  <Metadata>
+    <Types>
+      <Page ContentTypeSettings.Draftable="True" />    
+    </Types>
+    <Parts>
+      <BodyPart BodyPartSettings.FlavorDefault="html" />
+    </Parts>
+  </Metadata>
+
+  <Settings />
+
+  <Migration features="*" />
+  
+  <Command>
+      layer create Default /LayerRule:"true" /Description:"The widgets in this layer are displayed on all pages"
+      layer create TheHomepage /LayerRule:"url '~/'" /Description:"The widgets in this layer are displayed on the home page"
+      page create /Slug:"welcome-to-orchard" /Title:"Welcome to Orchard!" /Path:"welcome-to-orchard" /Homepage:true /Publish:true /Text:"Welcome To Orchard!" /MenuText:"Home" /MenuName:"Main Menu"
+      site setting set baseurl
+      theme activate "The Theme Machine"
+  </Command>
+</Orchard>

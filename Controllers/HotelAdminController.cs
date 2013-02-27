@@ -55,22 +55,22 @@ namespace Summit.Core.Controllers
 
         public Localizer T { get; set; }
 
-        public ActionResult Create(int destinationId, int? conceirgeId, bool noConceirge = false)
+        public ActionResult Create(int destinationId, int? conciergeId, bool noConcierge = false)
         {
             var destination = destinationService.Get(destinationId, VersionOptions.Latest).As<DestinationPart>();
 
             if (destination == null) return HttpNotFound();
 
-            if (!conceirgeId.HasValue && !noConceirge)
+            if (!conciergeId.HasValue && !noConcierge)
             {
-                return new ShapeResult(this, this.orchardServices.New.Parts_ConceirgePrompt(Destination: destination));
+                return new ShapeResult(this, this.orchardServices.New.Parts_ConciergePrompt(Destination: destination));
             }
 
             var hotel = this.Services.ContentManager.New<HotelPart>("Hotel");
             hotel.DestinationPart = destination;
 
-            if (conceirgeId.HasValue) {
-                hotel.SetFieldValue("Conceirge", "", "{" + conceirgeId.Value + "}");
+            if (conciergeId.HasValue) {
+                hotel.SetFieldValue("Concierge", "", "{" + conciergeId.Value + "}");
             }
 
             if (!Services.Authorizer.Authorize(Permissions.EditHotel, destination, T("Not allowed to create a hotel"))) return new HttpUnauthorizedResult();

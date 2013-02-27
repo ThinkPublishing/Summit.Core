@@ -5,12 +5,12 @@
     <!--fields-->
     <Place Fields_Question_Edit="Content:2.4"/>
     <Place Fields_Question="Content:after"/>
-
+   
+    
     <Match ContentType="Destination">
-        <Match DisplayType="DetailAdmin">
-            <Place Fields_Common_Text="-" />
-            <Place Fields_MediaPicker="-"/>
-        </Match>
+        <Place Fields_Common_Text="-" />
+        <Place Fields_MediaPicker="-"/>
+        <Place Fields_Contrib_TaxonomyField="-"/>
     </Match>
 
     <Match ContentType="Page">

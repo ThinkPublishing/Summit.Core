@@ -198,11 +198,11 @@ namespace Summit.Core
                         {
                             Route =
                                 new Route(
-                                "Admin/Conceirges/Create",
+                                "Admin/Concierges/Create",
                                 new RouteValueDictionary
                                     {
                                         { "area", "Summit.Core" },
-                                        { "controller", "ConceirgeAdmin" },
+                                        { "controller", "ConciergeAdmin" },
                                         { "action", "Create" }
                                     },
                                 new RouteValueDictionary(),
@@ -213,11 +213,11 @@ namespace Summit.Core
                         {
                             Route =
                                 new Route(
-                                "Admin/Conceirges/Create/{destinationId}",
+                                "Admin/Concierges/Create/{destinationId}",
                                 new RouteValueDictionary
                                     {
                                         { "area", "Summit.Core" },
-                                        { "controller", "ConceirgeAdmin" },
+                                        { "controller", "ConciergeAdmin" },
                                         { "action", "Create" }
                                     },
                                 new RouteValueDictionary(),

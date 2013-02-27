@@ -27,13 +27,13 @@ namespace Summit.Core.Controllers {
 
     [ValidateInput(false)]
     [Admin]
-    public class ConceirgeAdminController : Controller, IUpdateModel {
+    public class ConciergeAdminController : Controller, IUpdateModel {
         private readonly IDestinationService destinationService;
         private readonly IContentManager contentManager;
         private readonly ITransactionManager transactionManager;
         private readonly ISiteService siteService;
 
-        public ConceirgeAdminController(
+        public ConciergeAdminController(
             IOrchardServices services,
             IDestinationService destinationService,
             IContentManager contentManager,
@@ -56,9 +56,9 @@ namespace Summit.Core.Controllers {
         public IOrchardServices Services { get; set; }
 
         public ActionResult Create(int? destinationId) {
-            if (!Services.Authorizer.Authorize(Permissions.EditHotel, T("Not allowed to create create conceirges"))) return new HttpUnauthorizedResult();
+            if (!Services.Authorizer.Authorize(Permissions.EditHotel, T("Not allowed to create create concierges"))) return new HttpUnauthorizedResult();
 
-            var conc = this.Services.ContentManager.New("Conceirge").As("ConceirgePart");
+            var conc = this.Services.ContentManager.New("Concierge").As("ConciergePart");
             if (conc == null) return HttpNotFound();
 
             dynamic model = this.Services.ContentManager.BuildEditor(conc);
@@ -70,9 +70,9 @@ namespace Summit.Core.Controllers {
         [HttpPost]
         [ActionName("Create")]
         public ActionResult CreatePOST(int? destinationId) {
-            if (!Services.Authorizer.Authorize(Permissions.EditHotel, T("Couldn't create conceirge"))) return new HttpUnauthorizedResult();
+            if (!Services.Authorizer.Authorize(Permissions.EditHotel, T("Couldn't create concierge"))) return new HttpUnauthorizedResult();
 
-            var conc = this.Services.ContentManager.New("Conceirge").As("ConceirgePart");
+            var conc = this.Services.ContentManager.New("Concierge").As("ConciergePart");
 
             this.contentManager.Create(conc, VersionOptions.Draft);
             dynamic model = this.contentManager.UpdateEditor(conc, this);
@@ -89,16 +89,16 @@ namespace Summit.Core.Controllers {
             return destinationPart != null ? Redirect(Url.HotelCreate(destinationPart.As<DestinationPart>(), conc.Id)) : Redirect(Url.DestinationCreate());
         }
 
-        public ActionResult Edit(int conceirgeId) {
-            var conc = this.contentManager.Get(conceirgeId, VersionOptions.Latest);
+        public ActionResult Edit(int conciergeId) {
+            var conc = this.contentManager.Get(conciergeId, VersionOptions.Latest);
 
             if (
                 !Services.Authorizer.Authorize(
-                    Permissions.EditHotel, conc, T("Not allowed to edit conceirge"))) return new HttpUnauthorizedResult();
+                    Permissions.EditHotel, conc, T("Not allowed to edit concierge"))) return new HttpUnauthorizedResult();
 
             if (conc == null) return HttpNotFound();
 
-            dynamic model = Services.ContentManager.BuildEditor(conc.As("ConceirgePart"));
+            dynamic model = Services.ContentManager.BuildEditor(conc.As("ConciergePart"));
             // Casting to avoid invalid (under medium trust) reflection over the protected View method and force a static invocation.
             return View((object) model);
         }
@@ -106,15 +106,15 @@ namespace Summit.Core.Controllers {
         [HttpPost]
         [ActionName("Edit")]
         [FormValueRequired("submit.Delete")]
-        public ActionResult EditDeletePOST(int conceirgeId) {
-            if (!Services.Authorizer.Authorize(Permissions.EditHotel, T("Couldn't delete conceirge"))) return new HttpUnauthorizedResult();
+        public ActionResult EditDeletePOST(int conciergeId) {
+            if (!Services.Authorizer.Authorize(Permissions.EditHotel, T("Couldn't delete concierge"))) return new HttpUnauthorizedResult();
 
-            var conc = destinationService.Get(conceirgeId, VersionOptions.DraftRequired);
+            var conc = destinationService.Get(conciergeId, VersionOptions.DraftRequired);
             if (conc == null) return HttpNotFound();
 
             this.destinationService.Delete(conc);
 
-            this.Services.Notifier.Information(T("conceirge deleted"));
+            this.Services.Notifier.Information(T("concierge deleted"));
 
             return Redirect(Url.DestinationsForAdmin());
         }
@@ -123,10 +123,10 @@ namespace Summit.Core.Controllers {
         [HttpPost]
         [ActionName("Edit")]
         [FormValueRequired("submit.Save")]
-        public ActionResult EditPOST(int conceirgeId) {
-            var conc = this.contentManager.Get(conceirgeId, VersionOptions.DraftRequired);
+        public ActionResult EditPOST(int conciergeId) {
+            var conc = this.contentManager.Get(conciergeId, VersionOptions.DraftRequired);
 
-            if (!Services.Authorizer.Authorize(Permissions.EditHotel, conc, T("Couldn't edit conceirge"))) return new HttpUnauthorizedResult();
+            if (!Services.Authorizer.Authorize(Permissions.EditHotel, conc, T("Couldn't edit concierge"))) return new HttpUnauthorizedResult();
 
             if (conc == null) return HttpNotFound();
 
@@ -138,22 +138,22 @@ namespace Summit.Core.Controllers {
             }
 
             this.contentManager.Publish(conc);
-            this.Services.Notifier.Information(T("Conceirge information updated"));
+            this.Services.Notifier.Information(T("Concierge information updated"));
 
             return Redirect(Url.DestinationsForAdmin());
         }
 
         [HttpPost]
-        public ActionResult Remove(int conceirgeId) {
-            if (!Services.Authorizer.Authorize(Permissions.EditHotel, T("Couldn't delete conceirge"))) return new HttpUnauthorizedResult();
+        public ActionResult Remove(int conciergeId) {
+            if (!Services.Authorizer.Authorize(Permissions.EditHotel, T("Couldn't delete concierge"))) return new HttpUnauthorizedResult();
 
-            var conc = destinationService.Get(conceirgeId, VersionOptions.Latest);
+            var conc = destinationService.Get(conciergeId, VersionOptions.Latest);
 
             if (conc == null) return HttpNotFound();
 
             destinationService.Delete(conc);
 
-            Services.Notifier.Information(T("Conceirge was successfully deleted"));
+            Services.Notifier.Information(T("Concierge was successfully deleted"));
             return Redirect(Url.DestinationsForAdmin());
         }
 

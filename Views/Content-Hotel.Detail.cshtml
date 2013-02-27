@@ -1,20 +1,20 @@
 ﻿@using Summit.Core.Extensions
 @{
     var title = Model.ContentItem.TitlePart.Title;
-    var conceirge = Model.ContentItem.HotelPart.Conceirge.ContentItems[0];
+    var concierge = Model.ContentItem.HotelPart.Concierge.ContentItems[0];
     var location = Model.ContentItem.HotelPart.DestinationPart.ContentItem.TitlePart.Title;
 }
 
 <article style="width: 400px; float: left;">
     <h1>Welcome to the @title, @location</h1>
 
-    @if (conceirge != null) {
-        <div id="conceirge">
-            <img src="@Url.Content(conceirge.ConceirgePart.Image.Url)" alt="" />
+    @if (concierge != null) {
+        <div id="concierge">
+            <img src="@Url.Content(concierge.ConciergePart.Image.Url)" alt="" />
 
             <ul>
-                <li>Name @conceirge.TitlePart.Title</li>
-                @foreach (var field in conceirge.ConceirgePart.Fields) 
+                <li>Name @concierge.TitlePart.Title</li>
+                @foreach (var field in concierge.ConciergePart.Fields) 
                 {
                     if (field.FieldDefinition.Name == "TextField") {
                         <li>@field.DisplayName : @field.Value</li>
@@ -23,8 +23,8 @@
             </ul>
         </div>
     
-        <div id="conceirge-questions">
-              @foreach (var field in conceirge.ConceirgePart.Fields) 
+        <div id="concierge-questions">
+              @foreach (var field in concierge.ConciergePart.Fields) 
                 {
                     if (field.FieldDefinition.Name == "QuestionField") {
                         <h4>@field.PartFieldDefinition.Settings["QuestionFieldSettings.Question1"].Replace("[location]", location)</h4> 
@@ -38,7 +38,7 @@
 <aside>
     <img src="@Url.Content(Model.ContentItem.HotelPart.Logo.Url)" alt="@title" />
 
-     <p>@Model.ContentItem.HotelPart.DestinationPart.Quote.Value</p>
+     <p>@Html.Raw((string)Model.ContentItem.HotelPart.DestinationPart.Quote.Value)</p>
      @Display.GoogleMap(Markers: HtmlHelperMapExtensions.ToMapJson(Html, Model, false), Width: "320", Height: "260")
 
     

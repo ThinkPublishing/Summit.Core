@@ -8,7 +8,7 @@ namespace Summit.Core {
     public class Migration : DataMigrationImpl {
 
         public int Create() {
-            const string allowedImageExtensions = "jpg|jpeg|png|gif";
+            const string allowedImageExtensions = "jpg jpeg png gif";
 
             ContentDefinitionManager.AlterTypeDefinition("Destination",
              cfg => cfg
@@ -24,7 +24,7 @@ namespace Summit.Core {
                  .WithPart("DestinationPart")
              );
 
-            ContentDefinitionManager.AlterPartDefinition("ConceirgePart",
+            ContentDefinitionManager.AlterPartDefinition("ConciergePart",
                     cfg => cfg
                             .WithField("Position", field => field.OfType("TextField").WithDisplayName("Position"))
                             .WithField("ServiceLength", field => field.OfType("TextField").WithDisplayName("Length of service"))
@@ -50,13 +50,13 @@ namespace Summit.Core {
                             .WithField("Question15", field => field.OfType("QuestionField").WithSetting("QuestionFieldSettings.Question1", "What’s the current hotspot for nightlife?").WithSetting("QuestionFieldSettings.Question2", "What’s the current hotspot for nightlife?"))
                 );
 
-            ContentDefinitionManager.AlterTypeDefinition("Conceirge",
+            ContentDefinitionManager.AlterTypeDefinition("Concierge",
               cfg => cfg
                   .WithPart("CommonPart", p => p
                       .WithSetting("DateEditorSettings.ShowDateEditor", "false")
                       .WithSetting("OwnerEditorSettings.ShowOwnerEditor", "false"))
                   .WithPart("TitlePart")
-                  .WithPart("ConceirgePart")
+                  .WithPart("ConciergePart")
               );
            
             ContentDefinitionManager.AlterPartDefinition("HotelPart",
@@ -66,12 +66,12 @@ namespace Summit.Core {
                         .WithField("Phone", field => field.OfType("TextField").WithDisplayName("Phone Number"))
                         .WithField("ReservationUrl", field => field.OfType("TextField").WithDisplayName("Reservation Url"))
                         .WithField("Status", field => field.OfType("EnumerationField").WithDisplayName("Status").WithSetting("EnumerationFieldSettings.Options", "Active\r\nDecommisioned"))
-                        .WithField("Conceirge", field => field.OfType("ContentPickerField")
+                        .WithField("Concierge", field => field.OfType("ContentPickerField")
                                 .WithSetting("ContentPickerFieldSettings.Required", "true")
                                 .WithSetting("ContentPickerFieldSettings.Multiple", "false"))
                         );
 
-            ContentDefinitionManager.AlterPartDefinition("LocationPart",
+            ContentDefinitionManager.AlterPartDefinition("AddressPart",
                 cfg => cfg
                         .WithField("Address", field => field.OfType("TextField").WithDisplayName("Address").WithSetting("TextField.Required", "true"))
                         .WithField("City", field => field.OfType("TextField").WithDisplayName("City"))
@@ -80,14 +80,10 @@ namespace Summit.Core {
                         .WithField("Postcode", field => field.OfType("TextField").WithDisplayName("Postcode/Zipcode").WithSetting("TextField.Required", "true"))
                         );
 
-
-            const string destinationRegions =
-            "Asia & Pacific\r\nCaribbean\r\nCentral & South America\rEurope\r\nMiddle East & Africa\r\nNorth America - Canada\r\nNorth America - Mexico\r\nNorth America - USA";
             ContentDefinitionManager.AlterPartDefinition("DestinationPart",
                 cfg => cfg
                         .WithField("Quote", field => field.OfType("TextField").WithDisplayName("Quote").WithSetting("TextFieldSettings.Flavor", "Html"))
-                        .WithField("Region", field => field.OfType("EnumerationField").WithDisplayName("Region").WithSetting("EnumerationFieldSettings.Options", destinationRegions).WithSetting("EnumerationFieldSettings.Required", "true"))
-                        .WithField("Country", field => field.OfType("TextField").WithDisplayName("Country").WithSetting("TextField.Required", "true"))
+                        .WithField("Region", field => field.OfType("TaxonomyField").WithDisplayName("Region").WithSetting("TaxonomyFieldSettings.Taxonomy", "Region").WithSetting("TaxonomyFieldSettings.LeavesOnly", "true").WithSetting("TaxonomyFieldSettings.SingleChoice", "true"))
                         .WithField("Logo", field => field.OfType("MediaPickerField").WithSetting("MediaPickerFieldSettings.Required", "true").WithSetting("MediaPickerFieldSettings.AllowedExtensions", allowedImageExtensions))
                         );
 
@@ -103,7 +99,7 @@ namespace Summit.Core {
                          .WithSetting("AutorouteSettings.PatternDefinitions", "[{Name:'Title', Pattern: '{Content.Container.Path}/{Content.Slug}', Description: 'destination/my-hotel'}]")
                          .WithSetting("AutorouteSettings.DefaultPatternIndex", "0"))
                      .WithPart("HotelPart")
-                     .WithPart("LocationPart")
+                     .WithPart("AddressPart")
                      .Draftable()
                  );
 

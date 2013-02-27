@@ -62,16 +62,16 @@ namespace Summit.Core.Extensions
                 "Create", "HotelAdmin", new { destinationId = destinationPart.Id, area = "Summit.Core" });
         }
 
-        public static string HotelCreate(this UrlHelper urlHelper, DestinationPart destinationPart, int? conceirgeId)
+        public static string HotelCreate(this UrlHelper urlHelper, DestinationPart destinationPart, int? conciergeId)
         {
             return urlHelper.Action(
-                "Create", "HotelAdmin", new { destinationId = destinationPart.Id, conceirgeId = conceirgeId, area = "Summit.Core" });
+                "Create", "HotelAdmin", new { destinationId = destinationPart.Id, conciergeId = conciergeId, area = "Summit.Core" });
         }
 
-        public static string HotelCreate(this UrlHelper urlHelper, DestinationPart destinationPart, int? conceirgeId, bool noConceirge)
+        public static string HotelCreate(this UrlHelper urlHelper, DestinationPart destinationPart, int? conciergeId, bool noConcierge)
         {
             return urlHelper.Action(
-                "Create", "HotelAdmin", new { destinationId = destinationPart.Id, conceirgeId, noConceirge, area = "Summit.Core" });
+                "Create", "HotelAdmin", new { destinationId = destinationPart.Id, conciergeId, noConcierge, area = "Summit.Core" });
         }
 
         public static string HotelEdit(this UrlHelper urlHelper, HotelPart hotelPart)
@@ -106,10 +106,10 @@ namespace Summit.Core.Extensions
                 new { destinationId = hotelPart.DestinationPart.Id, hotelId = hotelPart.Id, area = "Summit.Core" });
         }
 
-        public static string ConceirgeCreate(this UrlHelper urlHelper, DestinationPart destinationPart)
+        public static string ConciergeCreate(this UrlHelper urlHelper, DestinationPart destinationPart)
         {
             return urlHelper.Action(
-                "Create", "ConceirgeAdmin", new { destinationId = destinationPart.Id, area = "Summit.Core" });
+                "Create", "ConciergeAdmin", new { destinationId = destinationPart.Id, area = "Summit.Core" });
         }
     }
 }

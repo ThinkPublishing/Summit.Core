@@ -13,17 +13,17 @@ namespace Summit.Core.Extensions {
 
         public static MvcHtmlString ToMapJson(this HtmlHelper html, dynamic content, bool includeTooltip) {
             var json = string.Empty;
-            var locationPart = content.ContentItem.LocationPart;
+            var addressPart = content.ContentItem.AddressPart;
 
-            if (locationPart != null) {
+            if (addressPart != null) {
                 var contentItem = (IContent) content.ContentItem;
 
                 var addressFields = new List<string> {
-                    locationPart.Address.Value,
-                    locationPart.City.Value,
-                    locationPart.ProvinceState.Value,
-                    locationPart.Country.Value,
-                    locationPart.Postcode.Value
+                    addressPart.Address.Value,
+                    addressPart.City.Value,
+                    addressPart.ProvinceState.Value,
+                    addressPart.Country.Value,
+                    addressPart.Postcode.Value
                 };
 
                 var tooltipMarkup = includeTooltip ? string.Concat("<a href='", contentItem.As<IAliasAspect>().Path, "'>", contentItem.As<ITitleAspect>().Title, "</a>") : string.Empty;

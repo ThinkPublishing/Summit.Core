@@ -38,7 +38,7 @@
 <aside>
     <img src="@Url.Content(Model.ContentItem.HotelPart.Logo.Url)" alt="@title" />
 
-     <p>@Model.ContentItem.DestinationPart.Quote.Value</p>
+     <p>@Model.ContentItem.HotelPart.DestinationPart.Quote.Value</p>
      @Display.GoogleMap(Markers: HtmlHelperMapExtensions.ToMapJson(Html, Model, false), Width: "320", Height: "260")
 
     

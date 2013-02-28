@@ -12,6 +12,9 @@ namespace Summit.Core {
 
             //search stuff
             manifest.DefineScript("search-widget").SetUrl("search-widget.js").SetDependencies(new[] { "jQuery", "jQueryUI" });
+
+            // core common js
+            manifest.DefineScript("summit-core").SetUrl("summit-core").SetDependencies(new[] { "jQuery" });
         }
     }
 }

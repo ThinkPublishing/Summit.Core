@@ -65,11 +65,15 @@
     <Content Include="Content\Admin\images\online.gif" />
     <Content Include="Content\Admin\images\published.gif" />
     <Content Include="Content\Admin\images\scheduled.gif" />
+    <Content Include="Imports\summit.demo.data.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Imports\summit.setup.xml" />
     <Content Include="Recipes\summit.recipe.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Scripts\gmap3.min.js" />
+    <Content Include="Scripts\summit-core.js" />
     <Content Include="Scripts\search-widget.js" />
     <Content Include="Styles\menu.summit-admin.css" />
     <Content Include="Styles\summit-admin.css" />
@@ -96,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminMenu.cs" />
+    <Compile Include="Attributes\ThemedConditionalAttribute.cs" />
     <Compile Include="Controllers\ConceirgeAdminController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\DestinationAdminController.cs" />
@@ -109,6 +114,7 @@
     <Compile Include="Extensions\HtmlHelperMapExtensions.cs" />
     <Compile Include="Extensions\UrlHelperExtensions.cs" />
     <Compile Include="Fields\QuestionField.cs" />
+    <Compile Include="Filters\ThemeConditionalFilter.cs" />
     <Compile Include="Handlers\DestinationPartHandler.cs" />
     <Compile Include="Handlers\HotelPartHandler.cs" />
     <Compile Include="Migrations.cs" />
@@ -189,6 +195,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ConceirgeAdmin\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Content-Destination.Summary.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Content-Page.Detail.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

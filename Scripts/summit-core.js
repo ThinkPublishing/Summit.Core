@@ -8,15 +8,14 @@
             url += "&ajax=true";
         }
 
-        $.ajax({
-            type: 'GET',
-            url: url,
-            success: function (data) {
-                $('.widget-homepage-destinations').fadeOut(300);
-                $('.widget-taxonomy-menu').slideUp(200);
-                $('.zone-content').replaceWith(data);
-                //                $('html,body').animate({ scrollTop: $('.wellbeing-category .recent-articles').offset().top }, 'slow');
-            }
+        $('.widget-homepage-destinations, .widget-taxonomy-menu').fadeOut(3000, function() {
+            $.ajax({
+                type: 'GET',
+                url: url,
+                success: function (data) {
+                    $('.zone-content').replaceWith(data);
+                }
+            });
         });
 
         return false;

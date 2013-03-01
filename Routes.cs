@@ -7,6 +7,8 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Summit.Core.Routing;
+
 namespace Summit.Core
 {
     using System.Collections.Generic;
@@ -17,6 +19,15 @@ namespace Summit.Core
 
     public class Routes : IRouteProvider
     {
+        private readonly ITaxonomySlugConstraint _taxonomySlugConstraint;
+        private readonly ITermPathConstraint _termPathConstraint;
+
+        public Routes(ITaxonomySlugConstraint taxonomySlugConstraint, ITermPathConstraint termPathConstraint)
+        {
+            _taxonomySlugConstraint = taxonomySlugConstraint;
+            _termPathConstraint = termPathConstraint;
+        }
+
         public void GetRoutes(ICollection<RouteDescriptor> routes)
         {
             foreach (var routeDescriptor in this.GetRoutes())
@@ -238,7 +249,58 @@ namespace Summit.Core
                                 new RouteValueDictionary(),
                                 new RouteValueDictionary { { "area", "Summit.Core" } },
                                 new MvcRouteHandler())
-                        }
+                        },
+                          new RouteDescriptor {
+                                                    Priority = 90,
+                                                    Route = new Route(
+                                                         "{taxonomySlug}",
+                                                         new RouteValueDictionary {
+                                                                                      {"area", "Summit.Core"},
+                                                                                      {"controller", "TaxonomyHome"},
+                                                                                      {"action", "List"},
+                                                                                      {"taxonomySlug", ""}
+                                                                                  },
+                                                         new RouteValueDictionary {
+                                                                                      {"taxonomySlug", _taxonomySlugConstraint}
+                                                                                  },
+                                                         new RouteValueDictionary {
+                                                                                      {"area", "Summit.Core"}
+                                                                                  },
+                                                         new MvcRouteHandler())
+                                                 },
+                             new RouteDescriptor {
+                                                    Priority = 90,
+                                                    Route = new Route(
+                                                         "{*termPath}",
+                                                         new RouteValueDictionary {
+                                                                                      {"area", "Summit.Core"},
+                                                                                      {"controller", "TaxonomyHome"},
+                                                                                      {"action", "Item"},
+                                                                                      {"termPath", ""}
+                                                                                  },
+                                                         new RouteValueDictionary {
+                                                                                      {"termPath", _termPathConstraint}
+                                                                                  },
+                                                         new RouteValueDictionary {
+                                                                                      {"area", "Summit.Core"}
+                                                                                  },
+                                                         new MvcRouteHandler())
+                                                 },
+                                                  new RouteDescriptor
+                        {
+                            Route =
+                                new Route(
+                                "Admin/Taxonomies",
+                                new RouteValueDictionary
+                                    {
+                                        { "area", "Summit.Core" },
+                                        { "controller", "TaxonomyAdmin" },
+                                        { "action", "Index" }
+                                    },
+                                new RouteValueDictionary(),
+                                new RouteValueDictionary { { "area", "Summit.Core" } },
+                                new MvcRouteHandler())
+                        },
                 };
         }
     }

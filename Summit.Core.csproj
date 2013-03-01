@@ -72,9 +72,11 @@
     <Content Include="Recipes\summit.recipe.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Scripts\admin-taxonomy-expando.js" />
     <Content Include="Scripts\gmap3.min.js" />
     <Content Include="Scripts\summit-core.js" />
     <Content Include="Scripts\search-widget.js" />
+    <Content Include="Styles\admin-taxonomy.css" />
     <Content Include="Styles\menu.summit-admin.css" />
     <Content Include="Styles\summit-admin.css" />
     <Content Include="Web.config" />
@@ -93,6 +95,10 @@
       <Project>{9916839C-39FC-4CEB-A5AF-89CA7E87119F}</Project>
       <Name>Orchard.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Orchard.Autoroute\Orchard.Autoroute.csproj">
+      <Project>{66FCCD76-2761-47E3-8D11-B45D0001DDAA}</Project>
+      <Name>Orchard.Autoroute</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Orchard.Projections\Orchard.Projections.csproj">
       <Project>{5531E894-D259-45A3-AA61-26DBE720C1CE}</Project>
       <Name>Orchard.Projections</Name>
@@ -106,35 +112,90 @@
     <Compile Include="Controllers\DestinationAdminController.cs" />
     <Compile Include="Controllers\DestinationController.cs" />
     <Compile Include="Controllers\HotelAdminController.cs" />
+    <Compile Include="Controllers\TaxonomyAdminController.cs" />
+    <Compile Include="Controllers\TaxonomyHomeController.cs" />
+    <Compile Include="Controllers\TermAdminController.cs" />
     <Compile Include="Drivers\SearchWidgetPartDriver.cs" />
     <Compile Include="Drivers\DestinationPartDriver.cs" />
     <Compile Include="Drivers\HotelPartDriver.cs" />
     <Compile Include="Drivers\QuestionFieldDriver.cs" />
+    <Compile Include="Drivers\TaxonomyFieldDriver.cs" />
+    <Compile Include="Drivers\TaxonomyMenuItemPartDriver.cs" />
+    <Compile Include="Drivers\TaxonomyMenuPartDriver.cs" />
+    <Compile Include="Drivers\TaxonomyPartDriver.cs" />
+    <Compile Include="Drivers\TermPartDriver.cs" />
+    <Compile Include="Drivers\TermsPartDriver.cs" />
+    <Compile Include="Drivers\TermWidgetPartDriver.cs" />
     <Compile Include="Extensions\ContentExtensions.cs" />
     <Compile Include="Extensions\HtmlHelperMapExtensions.cs" />
     <Compile Include="Extensions\UrlHelperExtensions.cs" />
     <Compile Include="Fields\QuestionField.cs" />
+    <Compile Include="Fields\TaxonomyField.cs" />
     <Compile Include="Filters\ThemeConditionalFilter.cs" />
     <Compile Include="Handlers\DestinationPartHandler.cs" />
     <Compile Include="Handlers\HotelPartHandler.cs" />
+    <Compile Include="Handlers\TaxonomyMenuItemPartHandler.cs" />
+    <Compile Include="Handlers\TaxonomyMenuPartHandler.cs" />
+    <Compile Include="Handlers\TaxonomyPartHandler.cs" />
+    <Compile Include="Handlers\TermPartHandler.cs" />
+    <Compile Include="Handlers\TermsPartHandler.cs" />
+    <Compile Include="Handlers\TermWidgetPartHandler.cs" />
+    <Compile Include="Helpers\PathExtensions.cs" />
+    <Compile Include="Helpers\PredicateBuilder.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Models\DestinationPart.cs" />
     <Compile Include="Models\HotelPart.cs" />
     <Compile Include="Models\SearchWidgetPart.cs" />
+    <Compile Include="Models\TaxonomyMenuItemPart.cs" />
+    <Compile Include="Models\TaxonomyMenuItemPartRecord.cs" />
+    <Compile Include="Models\TaxonomyMenuPart.cs" />
+    <Compile Include="Models\TaxonomyMenuPartRecord.cs" />
+    <Compile Include="Models\TaxonomyPart.cs" />
+    <Compile Include="Models\TaxonomyPartRecord.cs" />
+    <Compile Include="Models\TermContentItem.cs" />
+    <Compile Include="Models\TermPart.cs" />
+    <Compile Include="Models\TermPartRecord.cs" />
+    <Compile Include="Models\TermsPart.cs" />
+    <Compile Include="Models\TermsPartRecord.cs" />
+    <Compile Include="Models\TermWidgetPart.cs" />
+    <Compile Include="Models\TermWidgetPartRecord.cs" />
     <Compile Include="Permissions.cs" />
+    <Compile Include="Projections\TermsFilter.cs" />
+    <Compile Include="Projections\TermsFilterForms.cs" />
     <Compile Include="ResourceManifest.cs" />
     <Compile Include="Routes.cs" />
     <Compile Include="Routing\DestinationPathConstraint.cs" />
     <Compile Include="Routing\DestinationPathConstraintUpdator.cs" />
     <Compile Include="Routing\IDestinationPathConstraint.cs" />
+    <Compile Include="Routing\ITaxonomySlugConstraint.cs" />
+    <Compile Include="Routing\ITermPathConstraint.cs" />
+    <Compile Include="Routing\TaxonomySlugConstraint.cs" />
+    <Compile Include="Routing\TaxonomySlugConstraintUpdator.cs" />
+    <Compile Include="Routing\TermPathConstraint.cs" />
+    <Compile Include="Routing\TermPathConstraintUpdator.cs" />
     <Compile Include="Services\HotelService.cs" />
     <Compile Include="Services\DestinationService.cs" />
     <Compile Include="Services\IHotelService.cs" />
     <Compile Include="Services\IDestinationService.cs" />
     <Compile Include="Services\ISearchService.cs" />
+    <Compile Include="Services\ITaxonomyService.cs" />
     <Compile Include="Services\SearchService.cs" />
+    <Compile Include="Services\TaxonomyNavigationProvider.cs" />
+    <Compile Include="Services\TaxonomyService.cs" />
     <Compile Include="Settings\QuestionFieldEditorEvents.cs" />
     <Compile Include="Settings\QuestionFieldSettings.cs" />
+    <Compile Include="Settings\TaxonomyFieldEditorEvents.cs" />
+    <Compile Include="Settings\TaxonomyFieldSettings.cs" />
+    <Compile Include="Shapes.cs" />
+    <Compile Include="StandardQueries\TermFeedQuery.cs" />
+    <Compile Include="ViewModels\ImportViewModel.cs" />
+    <Compile Include="ViewModels\MoveTermViewModel.cs" />
+    <Compile Include="ViewModels\SelectTermViewModel.cs" />
+    <Compile Include="ViewModels\TaxonomyAdminIndexViewModel.cs" />
+    <Compile Include="ViewModels\TaxonomyFieldViewModel.cs" />
+    <Compile Include="ViewModels\TaxonomyMenuViewModel.cs" />
+    <Compile Include="ViewModels\TermAdminIndexViewModel.cs" />
+    <Compile Include="ViewModels\TermWidgetViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Destination.DeleteButton.cshtml" />
@@ -203,6 +264,42 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Content-Page.Detail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\DefinitionTemplates\TaxonomyFieldSettings.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EditorTemplates\Fields\Contrib.TaxonomyField.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EditorTemplates\Parts\Taxonomies.Menu.cshtml" />
+    <Content Include="Views\EditorTemplates\Parts\Taxonomies.TaxonomyMenuItem.cshtml" />
+    <Content Include="Views\EditorTemplates\Parts\Taxonomies.Term.Fields.cshtml" />
+    <Content Include="Views\EditorTemplates\Parts\Taxonomies.TermWidget.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Fields\Contrib.TaxonomyField.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Items\Content-Term.Edit.cshtml" />
+    <Content Include="Views\Items\Taxonomies.Term.cshtml" />
+    <Content Include="Views\Items\Taxonomy.List.cshtml" />
+    <Content Include="Views\Parts\Taxonomies.Menu.cshtml" />
+    <Content Include="Views\Parts\TermWidget.List.cshtml" />
+    <Content Include="Views\TaxonomyAdmin\Create.cshtml" />
+    <Content Include="Views\TaxonomyAdmin\Edit.cshtml" />
+    <Content Include="Views\TaxonomyAdmin\Import.cshtml" />
+    <Content Include="Views\TaxonomyAdmin\Index.cshtml" />
+    <Content Include="Views\TaxonomyHome\List.cshtml" />
+    <Content Include="Views\TermAdmin\Create.cshtml" />
+    <Content Include="Views\TermAdmin\Edit.cshtml" />
+    <Content Include="Views\TermAdmin\Index.cshtml" />
+    <Content Include="Views\TermAdmin\MoveTerm.cshtml" />
+    <Content Include="Views\TermAdmin\RenderTermSelect.cshtml" />
+    <Content Include="Views\TermAdmin\SelectTerm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Taxonomies.TermContentItems.List.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

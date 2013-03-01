@@ -5,5 +5,5 @@ Website: http://www.carlwoodhouse.com
 Version: 1.0
 OrchardVersion: 1.6
 Description: summit module
-Dependencies: Shapes, Common, Orchard.PublishLater, Orchard.ContentPicker, Orchard.Fields, Orchard.Widgets,  Contrib.Taxonomies
+Dependencies: Shapes, Common, Orchard.PublishLater, Orchard.ContentPicker, Orchard.Fields, Orchard.Widgets
 

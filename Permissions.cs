@@ -16,6 +16,11 @@ namespace Summit.Core
 
     public class Permissions : IPermissionProvider
     {
+        public static readonly Permission ManageTaxonomies = new Permission { Description = "Manage taxonomies", Name = "ManageTaxonomies" };
+        public static readonly Permission CreateTaxonomy = new Permission { Description = "Create taxonomy", Name = "CreateTaxonomy", ImpliedBy = new[] { ManageTaxonomies } };
+        public static readonly Permission ManageTerms = new Permission { Description = "Manage terms", Name = "ManageTerms", ImpliedBy = new[] { CreateTaxonomy } };
+        public static readonly Permission CreateTerm = new Permission { Description = "Create term", Name = "CreateTerm", ImpliedBy = new[] { ManageTerms } };
+
         public static readonly Permission ManageDestinations = new Permission
             { Description = "Manage destinations for others", Name = "ManageDestinations" };
 
@@ -69,7 +74,7 @@ namespace Summit.Core
             return new[]
                 {
                     ManageOwnDestinations, ManageDestinations, EditOwnHotel, EditHotel, PublishOwnHotel, PublishHotel,
-                    DeleteOwnHotel, DeleteHotel,
+                    DeleteOwnHotel, DeleteHotel, ManageTaxonomies, CreateTaxonomy
                 };
         }
 
@@ -77,9 +82,9 @@ namespace Summit.Core
         {
             return new[]
                 {
-                    new PermissionStereotype { Name = "Administrator", Permissions = new[] { ManageDestinations } },
+                    new PermissionStereotype { Name = "Administrator", Permissions = new[] { ManageDestinations, ManageTaxonomies } },
                     new PermissionStereotype
-                        { Name = "Editor", Permissions = new[] { PublishHotel, EditHotel, DeleteHotel } },
+                        { Name = "Editor", Permissions = new[] { ManageTaxonomies, PublishHotel, EditHotel, DeleteHotel } },
                     new PermissionStereotype { Name = "Moderator", },
                     new PermissionStereotype { Name = "Author", Permissions = new[] { ManageOwnDestinations } },
                     new PermissionStereotype { Name = "Contributor", Permissions = new[] { EditOwnHotel } },

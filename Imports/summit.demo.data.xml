@@ -5,7 +5,7 @@
     <Author>Carl Woodhouse</Author>
   </Recipe>
   <Data>
-    <Concierge Id="" Status="Published">
+    <Concierge Id="/identity:conc1" Status="Published">
       <TextField.Position Text="Customer Relations Manager" />
       <TextField.ServiceLength Text="5 Years" />
       <TextField.StrangestRequest Text="Order pizza to the Penthouse at 3.30am" />
@@ -31,7 +31,7 @@
       <CommonPart Owner="/User.UserName=admin" CreatedUtc="2013-02-27T14:57:00Z" PublishedUtc="2013-02-27T14:57:00Z" ModifiedUtc="2013-02-27T14:57:00Z" />
       <TitlePart Title="Jess Varish" />
     </Concierge>
-    <Concierge Id="" Status="Published">
+    <Concierge Id="/identity:conc2" Status="Published">
       <TextField.Position Text="Staff Chief" />
       <TextField.ServiceLength Text="11 Years" />
       <TextField.StrangestRequest Text="something odd" />
@@ -57,7 +57,7 @@
       <CommonPart Owner="/User.UserName=admin" CreatedUtc="2013-02-27T15:00:21Z" PublishedUtc="2013-02-27T15:00:21Z" ModifiedUtc="2013-02-27T15:00:21Z" />
       <TitlePart Title="Jason Fredricks" />
     </Concierge>
-    <Concierge Id="" Status="Published">
+    <Concierge Id="/identity:conc3" Status="Published">
       <TextField.Position Text="Greeter" />
       <TextField.ServiceLength Text="2 Years" />
       <TextField.StrangestRequest Text="Fetch cheese at 2am" />
@@ -106,7 +106,7 @@
       <TextField.ProvinceState />
       <TextField.Country Text="United Kingdom" />
       <TextField.Postcode Text="W2 1EE" />
-      <ContentPickerField.Concierge ContentItems="" />
+      <ContentPickerField.Concierge ContentItems="{/identity:conc1}" />
       <MediaPickerField.Logo Url="~/Media/Default/images/london-hotel.jpg" Width="0" Height="0" />
       <EnumerationField.Status Value="Active" />
       <CommonPart Owner="/User.UserName=admin" Container="/alias=london" CreatedUtc="2013-02-27T14:58:51Z" PublishedUtc="2013-02-27T14:58:51Z" ModifiedUtc="2013-02-27T14:58:51Z" />
@@ -122,7 +122,7 @@
       <TextField.ProvinceState />
       <TextField.Country Text="United Kingdom" />
       <TextField.Postcode Text="W2 1JU" />
-      <ContentPickerField.Concierge ContentItems="" />
+      <ContentPickerField.Concierge ContentItems="{/identity:conc2}" />
       <MediaPickerField.Logo Url="~/Media/Default/images/london-hotel-2.jpg" Width="0" Height="0" />
       <EnumerationField.Status Value="Active" />
       <CommonPart Owner="/User.UserName=admin" Container="/alias=london" CreatedUtc="2013-02-27T15:03:55Z" PublishedUtc="2013-02-27T15:03:55Z" ModifiedUtc="2013-02-27T15:03:55Z" />
@@ -138,7 +138,7 @@
       <TextField.ProvinceState Text="South Yorkshire" />
       <TextField.Country Text="United Kingdom" />
       <TextField.Postcode Text="S4 7YA" />
-      <ContentPickerField.Concierge ContentItems="" />
+      <ContentPickerField.Concierge ContentItems="{/identity:conc3}" />
       <MediaPickerField.Logo Url="~/Media/Default/images/sheffield-hotel.jpg" Width="0" Height="0" />
       <EnumerationField.Status Value="Active" />
       <CommonPart Owner="/User.UserName=admin" Container="/alias=sheffield" CreatedUtc="2013-02-27T15:09:43Z" PublishedUtc="2013-02-27T15:09:43Z" ModifiedUtc="2013-02-27T15:09:43Z" />

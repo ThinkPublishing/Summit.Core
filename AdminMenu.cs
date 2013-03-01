@@ -18,6 +18,11 @@ namespace Summit.Core {
         public string MenuName { get { return "admin"; } }
 
         public void GetNavigation(NavigationBuilder builder) {
+            builder.Add(T("Taxonomies"), "4",
+                        menu => menu
+                                    .Add(T("Manage Taxonomies"), "1.0", item => item.Action("Index", "TaxonomyAdmin", new { area = "Summit.Core" }).Permission(Permissions.ManageTaxonomies))
+                                    );
+
             builder.AddImageSet("summit")
                 .Add(T("Summit"), "1.5", BuildMenu);
         }

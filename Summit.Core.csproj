@@ -41,12 +41,22 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>Lib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer">
+      <HintPath>Lib\ImageResizer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.ComponentModel.DataAnnotations">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -65,6 +75,10 @@
     <Content Include="Content\Admin\images\online.gif" />
     <Content Include="Content\Admin\images\published.gif" />
     <Content Include="Content\Admin\images\scheduled.gif" />
+    <Content Include="Content\file.png" />
+    <Content Include="Content\image_not_found.jpg" />
+    <Content Include="Content\pdf.png" />
+    <Content Include="Content\swf.png" />
     <Content Include="Imports\summit.demo.data.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -74,10 +88,15 @@
     </Content>
     <Content Include="Scripts\admin-taxonomy-expando.js" />
     <Content Include="Scripts\gmap3.min.js" />
+    <Content Include="Scripts\ImageMultiPickerDashboard.js" />
+    <Content Include="Scripts\jquery.tmpl.js" />
     <Content Include="Scripts\summit-core.js" />
     <Content Include="Scripts\search-widget.js" />
     <Content Include="Styles\admin-taxonomy.css" />
+    <Content Include="Styles\Dashboard.css" />
+    <Content Include="Styles\img\folder.gif" />
     <Content Include="Styles\menu.summit-admin.css" />
+    <Content Include="Styles\MultiPicker.css" />
     <Content Include="Styles\summit-admin.css" />
     <Content Include="Web.config" />
     <Content Include="Views\Web.config" />
@@ -99,6 +118,10 @@
       <Project>{66FCCD76-2761-47E3-8D11-B45D0001DDAA}</Project>
       <Name>Orchard.Autoroute</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Orchard.Media\Orchard.Media.csproj">
+      <Project>{D9A7B330-CD22-4DA1-A95A-8DE1982AD8EB}</Project>
+      <Name>Orchard.Media</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Orchard.Projections\Orchard.Projections.csproj">
       <Project>{5531E894-D259-45A3-AA61-26DBE720C1CE}</Project>
       <Name>Orchard.Projections</Name>
@@ -107,7 +130,12 @@
   <ItemGroup>
     <Compile Include="AdminMenu.cs" />
     <Compile Include="Attributes\ThemedConditionalAttribute.cs" />
+    <Compile Include="Commands\Commands.cs" />
+    <Compile Include="Consts.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ConceirgeAdminController.cs" />
+    <Compile Include="Controllers\ImageResizerController.cs" />
+    <Compile Include="Controllers\MultipickerController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\DestinationAdminController.cs" />
     <Compile Include="Controllers\DestinationController.cs" />
@@ -115,6 +143,8 @@
     <Compile Include="Controllers\TaxonomyAdminController.cs" />
     <Compile Include="Controllers\TaxonomyHomeController.cs" />
     <Compile Include="Controllers\TermAdminController.cs" />
+    <Compile Include="Drivers\DriverBase.cs" />
+    <Compile Include="Drivers\ImageMultiPickerFieldDriver.cs" />
     <Compile Include="Drivers\SearchWidgetPartDriver.cs" />
     <Compile Include="Drivers\DestinationPartDriver.cs" />
     <Compile Include="Drivers\HotelPartDriver.cs" />
@@ -128,7 +158,13 @@
     <Compile Include="Drivers\TermWidgetPartDriver.cs" />
     <Compile Include="Extensions\ContentExtensions.cs" />
     <Compile Include="Extensions\HtmlHelperMapExtensions.cs" />
+    <Compile Include="Extensions\IntExtension.cs" />
+    <Compile Include="Extensions\JSONExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\StringBuilderExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\UrlHelperExtensions.cs" />
+    <Compile Include="Fields\ImageMultiPickerField.cs" />
     <Compile Include="Fields\QuestionField.cs" />
     <Compile Include="Fields\TaxonomyField.cs" />
     <Compile Include="Filters\ThemeConditionalFilter.cs" />
@@ -142,10 +178,14 @@
     <Compile Include="Handlers\TermWidgetPartHandler.cs" />
     <Compile Include="Helpers\PathExtensions.cs" />
     <Compile Include="Helpers\PredicateBuilder.cs" />
+    <Compile Include="Helpers\HtmlImageResizeHelper.cs" />
+    <Compile Include="ImageResizerFilters\GrayscaleFilter.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Models\DestinationPart.cs" />
     <Compile Include="Models\HotelPart.cs" />
+    <Compile Include="Models\ImagePowerToolsSettingsRecord.cs" />
     <Compile Include="Models\SearchWidgetPart.cs" />
+    <Compile Include="Models\SelectedImage.cs" />
     <Compile Include="Models\TaxonomyMenuItemPart.cs" />
     <Compile Include="Models\TaxonomyMenuItemPartRecord.cs" />
     <Compile Include="Models\TaxonomyMenuPart.cs" />
@@ -177,9 +217,17 @@
     <Compile Include="Services\DestinationService.cs" />
     <Compile Include="Services\IHotelService.cs" />
     <Compile Include="Services\IDestinationService.cs" />
+    <Compile Include="Services\ImageHeader.cs" />
+    <Compile Include="Services\ImageResizerService.cs" />
+    <Compile Include="Services\ImageTypes.cs" />
     <Compile Include="Services\ISearchService.cs" />
     <Compile Include="Services\ITaxonomyService.cs" />
+    <Compile Include="Services\MediaSearchService.cs" />
+    <Compile Include="Services\PowerToolsSettingsService.cs" />
+    <Compile Include="Services\QuerystringBuilder.cs" />
+    <Compile Include="Services\ResizeSettingTypes.cs" />
     <Compile Include="Services\SearchService.cs" />
+    <Compile Include="Services\SwfService.cs" />
     <Compile Include="Services\TaxonomyNavigationProvider.cs" />
     <Compile Include="Services\TaxonomyService.cs" />
     <Compile Include="Settings\QuestionFieldEditorEvents.cs" />
@@ -188,8 +236,19 @@
     <Compile Include="Settings\TaxonomyFieldSettings.cs" />
     <Compile Include="Shapes.cs" />
     <Compile Include="StandardQueries\TermFeedQuery.cs" />
+    <Compile Include="SwfHeaderReader.cs" />
+    <Compile Include="SwfTools\Rect.cs" />
+    <Compile Include="SwfTools\SWFFile.cs" />
+    <Compile Include="SwfTools\SWFReader.cs" />
+    <Compile Include="SwfTools\Tag.cs" />
+    <Compile Include="Tasks\CacheCleanupTask.cs" />
+    <Compile Include="ViewModels\Admin\CacheStatisticsViewModel.cs" />
+    <Compile Include="ViewModels\Admin\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\ImageMultiPickerFieldEditorViewModel.cs" />
     <Compile Include="ViewModels\ImportViewModel.cs" />
     <Compile Include="ViewModels\MoveTermViewModel.cs" />
+    <Compile Include="ViewModels\Multipicker\BreadcrumbViewModel.cs" />
+    <Compile Include="ViewModels\Multipicker\MediaFolderEditViewModel.cs" />
     <Compile Include="ViewModels\SelectTermViewModel.cs" />
     <Compile Include="ViewModels\TaxonomyAdminIndexViewModel.cs" />
     <Compile Include="ViewModels\TaxonomyFieldViewModel.cs" />
@@ -300,6 +359,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Taxonomies.TermContentItems.List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Admin\Cache.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Admin\Settings.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EditorTemplates\Fields_ImageMultiPicker_Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Multipicker\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Fields_ImageMultiPicker.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

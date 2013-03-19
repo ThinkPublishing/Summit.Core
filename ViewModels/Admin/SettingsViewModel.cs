@@ -1,0 +1,33 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+using Summit.Core.Models;
+
+namespace Summit.Core.ViewModels.Admin
+{
+    public class SettingsViewModel
+    {
+        public SettingsViewModel(){}
+
+        public SettingsViewModel(ImagePowerToolsSettingsRecord settingsRecord)
+        {
+            EnableFrontendResizeAction = settingsRecord.EnableFrontendResizeAction;
+            MaxImageWidth = settingsRecord.MaxImageWidth;
+            MaxImageHeight = settingsRecord.MaxImageHeight;
+        }
+
+        [Required]
+        public bool EnableFrontendResizeAction { get; set; }
+        
+        [Required]
+        [DisplayName("Maximal Image Width")]
+        public int MaxImageWidth { get; set; }
+        [Required]
+        [DisplayName("Maximal Image Height")]
+        public int MaxImageHeight { get; set; }
+
+    }
+}

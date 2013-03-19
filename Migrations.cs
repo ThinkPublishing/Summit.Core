@@ -1,14 +1,27 @@
-﻿using Orchard.ContentManagement.MetaData;
+﻿using System;
+using Orchard.ContentManagement.MetaData;
 using Orchard.Core.Contents.Extensions;
 using Orchard.Data.Migration;
 using Orchard.Projections.Models;
 using Orchard.Projections.Services;
+using Summit.Core.Models;
 
 namespace Summit.Core {
     public class Migration : DataMigrationImpl {
 
         public int Create() {
             const string allowedImageExtensions = "jpg jpeg png gif";
+
+            SchemaBuilder.CreateTable(typeof(ImagePowerToolsSettingsRecord).Name,
+                table => table
+                    .Column<int>("Id", c => c.PrimaryKey().Identity())
+                    .Column<int>("MaxCacheSizeMB")
+                    .Column<int>("MaxCacheAgeDays")
+                    .Column<bool>("EnableFrontendResizeAction")
+                    .Column<int>("MaxImageWidth")
+                    .Column<int>("MaxImageHeight")
+                    .Column<DateTime>("DeleteOldLastJobRun")
+                );
 
             ContentDefinitionManager.AlterTypeDefinition("Destination",
              cfg => cfg
@@ -62,7 +75,7 @@ namespace Summit.Core {
             ContentDefinitionManager.AlterPartDefinition("HotelPart",
                 cfg => cfg
                         .WithField("Description", field => field.OfType("TextField").WithDisplayName("Description").WithSetting("TextFieldSettings.Flavor", "Html"))
-                        .WithField("Logo", field => field.OfType("MediaPickerField").WithSetting("MediaPickerFieldSettings.Required", "true").WithSetting("MediaPickerFieldSettings.AllowedExtensions", allowedImageExtensions))
+                        .WithField("Gallery", field => field.OfType("ImageMultiPickerField"))
                         .WithField("Phone", field => field.OfType("TextField").WithDisplayName("Phone Number"))
                         .WithField("ReservationUrl", field => field.OfType("TextField").WithDisplayName("Reservation Url"))
                         .WithField("Status", field => field.OfType("EnumerationField").WithDisplayName("Status").WithSetting("EnumerationFieldSettings.Options", "Active\r\nDecommisioned"))
@@ -84,7 +97,7 @@ namespace Summit.Core {
                 cfg => cfg
                         .WithField("Quote", field => field.OfType("TextField").WithDisplayName("Quote").WithSetting("TextFieldSettings.Flavor", "Html"))
                         .WithField("Region", field => field.OfType("TaxonomyField").WithDisplayName("Region").WithSetting("TaxonomyFieldSettings.Taxonomy", "Region").WithSetting("TaxonomyFieldSettings.LeavesOnly", "true").WithSetting("TaxonomyFieldSettings.SingleChoice", "true"))
-                        .WithField("Logo", field => field.OfType("MediaPickerField").WithSetting("MediaPickerFieldSettings.Required", "true").WithSetting("MediaPickerFieldSettings.AllowedExtensions", allowedImageExtensions))
+                        .WithField("Gallery", field => field.OfType("ImageMultiPickerField"))
                         );
 
             ContentDefinitionManager.AlterTypeDefinition("Hotel",

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Orchard.Security;
 using Summit.Core.Services;
 using Orchard.Localization;
 using Orchard.UI.Navigation;
@@ -25,6 +26,13 @@ namespace Summit.Core {
 
             builder.AddImageSet("summit")
                 .Add(T("Summit"), "1.5", BuildMenu);
+
+            builder
+         .Add(T("Settings"), menu => menu
+             .Add(T("Image Power Tools"), "1.0", x => x
+                 .Add(T("Settings"), "1.0", a => a.Action("Settings", "Admin", new { area = "Summit.Core" }).Permission(StandardPermissions.SiteOwner).LocalNav())
+                 .Add(T("Cache"), "2.0", a => a.Action("Cache", "Admin", new { area = "Summit.Core" }).Permission(StandardPermissions.SiteOwner).LocalNav())
+             ));
         }
 
         private void BuildMenu(NavigationItemBuilder menu) {

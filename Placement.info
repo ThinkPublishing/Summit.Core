@@ -5,6 +5,8 @@
     <!--fields-->
     <Place Fields_Question_Edit="Content:2.4"/>
     <Place Fields_Question="Content:after"/>
+    <Place Fields_ImageMultiPicker_Edit="Content:2.5"/>
+    <Place Fields_ImageMultiPicker="Content:before" />
    
     
     <Match ContentType="Destination">

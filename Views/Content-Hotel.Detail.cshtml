@@ -40,12 +40,11 @@
 </article>
 
 <aside>
-	@foreach(var image in destinationImages)
+	@foreach(var image in destinationImages.Take(2))
 	{
 		@Html.ResizedImage(image.FilePath, width:250, height:190, htmlAttributes: new {alt = "Lolcats"}) 
 	}
 
-	@Html.ResizedImage((string)Model.ContentItem.HotelPart.Image.Url, width:250, height:190, htmlAttributes: new {alt = "Lolcats"})
      <p>@Html.Raw((string)Model.ContentItem.HotelPart.DestinationPart.Quote.Value)</p>
      @Display.GoogleMap(Markers: HtmlHelperMapExtensions.ToMapJson(Html, Model, false), Width: "320", Height: "260")
 
@@ -56,5 +55,6 @@
         <a href="@Model.ContentItem.HotelPart.ReservationUrl.Value">
             Book Now
         </a>
+		@Html.ResizedImage((string)Model.ContentItem.HotelPart.Image.Url, width:100, height:100, htmlAttributes: new {alt = "Lolcats"})
     </div>
 </aside>

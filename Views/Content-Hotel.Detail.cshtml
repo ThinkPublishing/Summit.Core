@@ -6,8 +6,7 @@
     var concierge = Model.ContentItem.HotelPart.Concierge.ContentItems[0];
     var location = Model.ContentItem.HotelPart.DestinationPart.ContentItem.TitlePart.Title;
 
-    var images = (ImageMultiPickerField)Model.ContentItem.HotelPart.Gallery;
-    var image = images.Images.FirstOrDefault();
+    var images = (ImageMultiPickerField)Model.ContentItem.HotelPart.DestinationPart.Gallery;
 }
 
 <article style="width: 400px; float: left;">
@@ -41,7 +40,11 @@
 </article>
 
 <aside>
-   @Html.ResizedImage(image.FilePath, width:250, height:190, htmlAttributes: new {alt = "Lolcats"}) 
+	@foreach(var image in images)
+	{
+		@Html.ResizedImage(image.FilePath, width:250, height:190, htmlAttributes: new {alt = "Lolcats"}) 
+		<br />
+	}
 
      <p>@Html.Raw((string)Model.ContentItem.HotelPart.DestinationPart.Quote.Value)</p>
      @Display.GoogleMap(Markers: HtmlHelperMapExtensions.ToMapJson(Html, Model, false), Width: "320", Height: "260")

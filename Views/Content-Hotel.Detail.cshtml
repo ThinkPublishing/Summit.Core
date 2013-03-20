@@ -45,7 +45,7 @@
 		@Html.ResizedImage(image.FilePath, width:250, height:190, htmlAttributes: new {alt = "Lolcats"}) 
 	}
 
-	@Html.ResizedImage(Model.ContentItem.HotelPart.DestinationPart.ContentItem.Image.Url, width:250, height:190, htmlAttributes: new {alt = "Lolcats"}) 
+	@Html.ResizedImage(Model.ContentItem.HotelPart.Image.Url, width:250, height:190, htmlAttributes: new {alt = "Lolcats"}) 
      <p>@Html.Raw((string)Model.ContentItem.HotelPart.DestinationPart.Quote.Value)</p>
      @Display.GoogleMap(Markers: HtmlHelperMapExtensions.ToMapJson(Html, Model, false), Width: "320", Height: "260")
 

@@ -14,7 +14,7 @@
 
     @if (concierge != null) {
         <div id="concierge">
-            <img src="@Url.Content(concierge.ConciergePart.Image.Url)" alt="" />
+			@Html.ResizedImage((string)concierge.ConciergePart.Image.Url, width:250, height:190, htmlAttributes: new {alt = "Lolcats"})
 
             <ul>
                 <li>Name @concierge.TitlePart.Title</li>
@@ -45,7 +45,7 @@
 		@Html.ResizedImage(image.FilePath, width:250, height:190, htmlAttributes: new {alt = "Lolcats"}) 
 	}
 
-	@Html.ResizedImage(Model.ContentItem.HotelPart.Image.Url, width:250, height:190, htmlAttributes: new {alt = "Lolcats"}) 
+	@Html.ResizedImage((string)Model.ContentItem.HotelPart.Image.Url, width:250, height:190, htmlAttributes: new {alt = "Lolcats"})
      <p>@Html.Raw((string)Model.ContentItem.HotelPart.DestinationPart.Quote.Value)</p>
      @Display.GoogleMap(Markers: HtmlHelperMapExtensions.ToMapJson(Html, Model, false), Width: "320", Height: "260")
 

@@ -3,7 +3,7 @@
 @using Summit.Core.Helpers;
 @{
     var contentTypeClassName = ((string)Model.ContentItem.ContentType).HtmlClassify();
-	var images = (ImageMultiPickerField)Model.ContentItem.HotelPart.Gallery;
+	var images = ((ImageMultiPickerField)Model.ContentItem.HotelPart.Gallery).Images;
 	var image = images.FirstOrDefault();
 }
 <article class="content-item @contentTypeClassName">

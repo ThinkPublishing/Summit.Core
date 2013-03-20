@@ -7,7 +7,7 @@
     }
     
     var contentTypeClassName = ((string)Model.ContentItem.ContentType).HtmlClassify();
-	var images = (ImageMultiPickerField)Model.ContentItem.DestinationPart.Gallery;
+	var images = ((ImageMultiPickerField)Model.ContentItem.DestinationPart.Gallery).Images;
 	var image = images.FirstOrDefault();
 }
 <article class="content-item @contentTypeClassName">

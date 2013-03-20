@@ -10,6 +10,7 @@
    
     
     <Match ContentType="Destination">
+	     <Place Fields_ImageMultiPicker="-" />
         <Place Fields_Common_Text="-" />
         <Place Fields_MediaPicker="-"/>
         <Place Fields_Contrib_TaxonomyField="-"/>

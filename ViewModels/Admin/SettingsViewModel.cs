@@ -1,13 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using Summit.Core.Models;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SettingsViewModel.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.ViewModels.Admin
 {
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
+    using Summit.Core.Models;
+
     public class SettingsViewModel
     {
         public SettingsViewModel(){}

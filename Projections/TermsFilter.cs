@@ -1,18 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Summit.Core.Models;
-using Summit.Core.Services;
-using Orchard.ContentManagement;
-using Orchard.Events;
-using Orchard.Localization;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TermsFilter.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace Summit.Core.Projections {
-    public interface IFilterProvider : IEventHandler {
+namespace Summit.Core.Projections 
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Orchard.ContentManagement;
+    using Orchard.Events;
+    using Orchard.Localization;
+
+    using Summit.Core.Models;
+    using Summit.Core.Services;
+
+    public interface IFilterProvider : IEventHandler 
+    {
         void Describe(dynamic describe);
     }
 
-    public class TermsFilter : IFilterProvider {
+    public class TermsFilter : IFilterProvider 
+    {
         private readonly ITaxonomyService _taxonomyService;
 
         public TermsFilter(ITaxonomyService taxonomyService) {
@@ -68,5 +82,4 @@ namespace Summit.Core.Projections {
             return T("Categorized with {0}", String.Join(", ", tagNames));
         }
     }
-
 }

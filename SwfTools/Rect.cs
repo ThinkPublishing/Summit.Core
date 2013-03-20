@@ -1,4 +1,11 @@
-using System;
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Rect.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace FlashTools
 {

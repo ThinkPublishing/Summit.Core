@@ -1,7 +1,16 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ImagePowerToolsSettingsRecord.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.Models
 {
+    using System;
+
     public class ImagePowerToolsSettingsRecord
     {
         public virtual int Id { get; set; }

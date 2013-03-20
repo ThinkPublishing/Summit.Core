@@ -1,9 +1,20 @@
-﻿using System.Collections.Generic;
-using Orchard;
-using Orchard.ContentManagement;
-using Summit.Core.Models;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ITaxonomyService.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.Services {
+    using System.Collections.Generic;
+
+    using Orchard;
+    using Orchard.ContentManagement;
+
+    using Summit.Core.Models;
+
     public interface ITaxonomyService : IDependency {
         IEnumerable<TaxonomyPart> GetTaxonomies();
         TaxonomyPart GetTaxonomy(int id);

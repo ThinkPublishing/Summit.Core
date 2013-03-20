@@ -1,6 +1,11 @@
-﻿
-
-using Summit.Core.Attributes;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ThemeConditionalFilter.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.Filters
 {
@@ -11,30 +16,41 @@ namespace Summit.Core.Filters
     using Orchard.Mvc.Filters;
     using Orchard.Themes;
 
+    using Summit.Core.Attributes;
 
     /// <summary>The theme conditional filter.</summary>
-    public class ThemeConditionalFilter : FilterProvider, IActionFilter, IResultFilter {
-        public void OnActionExecuting(ActionExecutingContext filterContext) {
+    public class ThemeConditionalFilter : FilterProvider, IActionFilter, IResultFilter
+    {
+        public void OnActionExecuting(ActionExecutingContext filterContext)
+        {
             var attribute = GetThemedAttribute(filterContext.ActionDescriptor);
-    
-            if (attribute != null && CheckAjax(attribute, filterContext.HttpContext.Request.IsAjaxRequest())) {
+
+            if (attribute != null && CheckAjax(attribute, filterContext.HttpContext.Request.IsAjaxRequest()))
+            {
                 Apply(filterContext.RequestContext);
             }
         }
 
-        public void OnActionExecuted(ActionExecutedContext filterContext) {}
-
-        public void OnResultExecuting(ResultExecutingContext filterContext) {
+        public void OnActionExecuted(ActionExecutedContext filterContext)
+        {
         }
 
-        public void OnResultExecuted(ResultExecutedContext filterContext) {}
+        public void OnResultExecuting(ResultExecutingContext filterContext)
+        {
+        }
 
-        public static void Apply(RequestContext context) {
+        public void OnResultExecuted(ResultExecutedContext filterContext)
+        {
+        }
+
+        public static void Apply(RequestContext context)
+        {
             // the value isn't important
             context.HttpContext.Items[typeof(ThemeFilter)] = null;
         }
 
-        public static bool IsApplied(RequestContext context) {
+        public static bool IsApplied(RequestContext context)
+        {
             return context.HttpContext.Items.Contains(typeof(ThemeFilter));
         }
 
@@ -55,10 +71,10 @@ namespace Summit.Core.Filters
 
         private static ThemedConditionalAttribute GetThemedAttribute(ActionDescriptor descriptor)
         {
-            return descriptor.GetCustomAttributes(typeof (ThemedConditionalAttribute), true)
-                .Concat(descriptor.ControllerDescriptor.GetCustomAttributes(typeof(ThemedConditionalAttribute), true))
-                .OfType<ThemedConditionalAttribute>()
-                .FirstOrDefault();
+            return
+                descriptor.GetCustomAttributes(typeof(ThemedConditionalAttribute), true).Concat(
+                    descriptor.ControllerDescriptor.GetCustomAttributes(typeof(ThemedConditionalAttribute), true)).
+                    OfType<ThemedConditionalAttribute>().FirstOrDefault();
         }
     }
 }

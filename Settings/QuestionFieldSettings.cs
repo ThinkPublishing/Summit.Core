@@ -1,4 +1,13 @@
-﻿namespace Summit.Core.Settings {
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="QuestionFieldSettings.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Summit.Core.Settings {
 
 
     public class QuestionFieldSettings {

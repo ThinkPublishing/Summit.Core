@@ -1,20 +1,15 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ThemedConditionalAttribute.cs" company="EMIS">
-//   Copyright (©)2012, EMIS Limited. All rights reserved.
+// <copyright file="ThemedConditionalAttribute.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
 // </copyright>
 // <summary>
-//   themed conditional
+//   Conditional theme attribute
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.Attributes
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
-    using Orchard.Themes;
 
     /// <summary>The themed conditional attribute.</summary>
     public class ThemedConditionalAttribute : Attribute

@@ -1,7 +1,18 @@
-﻿using Orchard.ContentManagement.Records;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TermWidgetPartRecord.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace Summit.Core.Models {
-    public class TermWidgetPartRecord : ContentPartRecord {
+namespace Summit.Core.Models 
+{
+    using Orchard.ContentManagement.Records;
+
+    public class TermWidgetPartRecord : ContentPartRecord 
+    {
         public TermWidgetPartRecord() {
             Count = 10;
         }

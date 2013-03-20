@@ -131,7 +131,7 @@
     <Compile Include="AdminMenu.cs" />
     <Compile Include="Attributes\ThemedConditionalAttribute.cs" />
     <Compile Include="Commands\Commands.cs" />
-    <Compile Include="Consts.cs" />
+    <Compile Include="ImageConsts.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ConceirgeAdminController.cs" />
     <Compile Include="Controllers\ImageResizerController.cs" />

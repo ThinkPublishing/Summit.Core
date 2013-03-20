@@ -1,11 +1,16 @@
-﻿using Summit.Core.Fields;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ImageMultiPickerFieldEditorViewModel.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.ViewModels
 {
+    using Summit.Core.Fields;
+
     public class ImageMultiPickerFieldEditorViewModel
     {
         public string Data { get; set; }

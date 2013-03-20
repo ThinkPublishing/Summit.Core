@@ -1,10 +1,19 @@
-﻿using System.Linq;
-using Orchard.Security;
-using Summit.Core.Services;
-using Orchard.Localization;
-using Orchard.UI.Navigation;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AdminMenu.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core {
+    using System.Linq;
+
+    using Orchard.Localization;
+    using Orchard.Security;
+    using Orchard.UI.Navigation;
+
     using Summit.Core.Services;
 
     public class AdminMenu : INavigationProvider {

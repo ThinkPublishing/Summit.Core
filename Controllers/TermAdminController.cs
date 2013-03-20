@@ -1,17 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
-using Orchard;
-using Orchard.Localization;
-using Summit.Core.ViewModels;
-using Summit.Core.Services;
-using Orchard.UI.Admin;
-using Orchard.ContentManagement;
-using Orchard.UI.Notify;
-using Summit.Core.Helpers;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TermAdminController.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   taxnomy term admin controller
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.Controllers {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
+
+    using Orchard;
+    using Orchard.ContentManagement;
+    using Orchard.Localization;
+    using Orchard.UI.Admin;
+    using Orchard.UI.Notify;
+
+    using Summit.Core.Helpers;
+    using Summit.Core.Services;
+    using Summit.Core.ViewModels;
+
     [ValidateInput(false), Admin]
     public class TermAdminController : Controller, IUpdateModel {
         private readonly ITaxonomyService _taxonomyService;

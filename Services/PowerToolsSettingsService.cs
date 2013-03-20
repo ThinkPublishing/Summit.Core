@@ -1,13 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Summit.Core.Models;
-using Orchard;
-using Orchard.Data;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="PowerToolsSettingsService.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.Services
 {
+    using System.Linq;
+
+    using Orchard;
+    using Orchard.Data;
+
+    using Summit.Core.Models;
+
     public interface IPowerToolsSettingsService : IDependency
     {
         ImagePowerToolsSettingsRecord Settings { get; }

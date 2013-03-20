@@ -1,13 +1,25 @@
-﻿using System.Collections.Generic;
-using Orchard.ContentManagement;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TermsPart.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace Summit.Core.Models {
+namespace Summit.Core.Models 
+{
+    using System.Collections.Generic;
+
+    using Orchard.ContentManagement;
+
     /// <summary>
     /// This Content Part is used to create a link to TermContentItem records, so
     /// that the Content Manager can query them. It will be attached dynamically whenever
     /// a TaxonomyField is found on a Content Type
     /// </summary>
-    public class TermsPart : ContentPart<TermsPartRecord> {
+    public class TermsPart : ContentPart<TermsPartRecord> 
+    {
         public IList<TermContentItem> Terms { get { return Record.Terms; } }
     }
 }

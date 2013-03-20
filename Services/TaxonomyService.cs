@@ -1,22 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Summit.Core.Models;
-using Orchard;
-using Orchard.Autoroute.Models;
-using Orchard.ContentManagement;
-using Orchard.ContentManagement.Aspects;
-using Orchard.ContentManagement.MetaData;
-using Orchard.Core.Common.Models;
-using Orchard.Core.Title.Models;
-using Orchard.Data;
-using Orchard.Localization;
-using Orchard.Logging;
-using Orchard.Security;
-using Orchard.UI.Notify;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TaxonomyService.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.Services {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+
+    using Orchard;
+    using Orchard.Autoroute.Models;
+    using Orchard.ContentManagement;
+    using Orchard.ContentManagement.Aspects;
+    using Orchard.ContentManagement.MetaData;
+    using Orchard.Core.Common.Models;
+    using Orchard.Core.Title.Models;
+    using Orchard.Data;
+    using Orchard.Localization;
+    using Orchard.Logging;
+    using Orchard.Security;
+    using Orchard.UI.Notify;
+
+    using Summit.Core.Models;
 
     public class TaxonomyService : ITaxonomyService {
         private readonly IRepository<TermContentItem> _termContentItemRepository;

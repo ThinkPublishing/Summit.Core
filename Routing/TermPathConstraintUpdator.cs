@@ -1,13 +1,26 @@
-using Summit.Core.Services;
-using Orchard;
-using Orchard.Environment;
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TermPathConstraintUpdator.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace Summit.Core.Routing {
-    public interface ITermPathConstraintUpdator : IDependency {
+namespace Summit.Core.Routing 
+{
+    using Summit.Core.Services;
+
+    using Orchard;
+    using Orchard.Environment;
+
+    public interface ITermPathConstraintUpdator : IDependency 
+    {
         void Refresh();
     }
 
-    public class TermPathConstraintUpdator : ITermPathConstraintUpdator, IOrchardShellEvents {
+    public class TermPathConstraintUpdator : ITermPathConstraintUpdator, IOrchardShellEvents
+    {
         private readonly ITermPathConstraint _termPathConstraint;
         private readonly ITaxonomyService _taxonomyService;
 

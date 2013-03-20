@@ -1,9 +1,18 @@
-using System;
-using System.IO;
-using System.Text;
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SWFReader.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace FlashTools
 {
+    using System;
+    using System.IO;
+    using System.Text;
+
     /// <summary>
     /// Class that makes it easier to read SWF (Flash) files
     /// Written by Michael Swanson (http://blogs.msdn.com/mswanson)

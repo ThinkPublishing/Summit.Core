@@ -1,13 +1,24 @@
-﻿using System.Xml.Linq;
-using Summit.Core.Fields;
-using Summit.Core.ViewModels;
-using Orchard;
-using Orchard.ContentManagement;
-using Orchard.ContentManagement.Drivers;
-using Orchard.ContentManagement.Handlers;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ImageMultiPickerFieldDriver.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   image multipicker field driver
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.Drivers
 {
+    using System.Xml.Linq;
+
+    using Orchard;
+    using Orchard.ContentManagement;
+    using Orchard.ContentManagement.Drivers;
+    using Orchard.ContentManagement.Handlers;
+
+    using Summit.Core.Fields;
+    using Summit.Core.ViewModels;
+
     public class ImageMultiPickerFieldDriver : FieldDriverBase<ImageMultiPickerField> 
     {
         private IOrchardServices _services { get; set; }
@@ -20,10 +31,7 @@ namespace Summit.Core.Drivers
         protected override DriverResult Display(ContentPart part, ImageMultiPickerField field, string displayType, dynamic shapeHelper)
         {
             return ContentShape("Fields_ImageMultiPicker", GetDifferentiator(field, part),
-                () =>
-                {
-                    return shapeHelper.Fields_ImageMultiPicker(Name: field.Name, Field: field);
-                });
+                () => shapeHelper.Fields_ImageMultiPicker(Name: field.Name, Field: field));
         }
 
         protected override DriverResult Editor(ContentPart part, ImageMultiPickerField field, dynamic shapeHelper)

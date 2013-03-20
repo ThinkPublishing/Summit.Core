@@ -1,14 +1,27 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Routing;
-using JetBrains.Annotations;
-using Orchard.Logging;
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TermPathConstraint.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace Summit.Core.Routing {
+namespace Summit.Core.Routing 
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web;
+    using System.Web.Routing;
+
+    using JetBrains.Annotations;
+
+    using Orchard.Logging;
+
     [UsedImplicitly]
-    public class TermPathConstraint : ITermPathConstraint {
+    public class TermPathConstraint : ITermPathConstraint 
+    {
         /// <summary>
         /// Singleton object, per Orchard Shell instance. We need to protect concurrent access to the dictionary.
         /// </summary>

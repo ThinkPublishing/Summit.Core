@@ -7,8 +7,6 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Summit.Core.Routing;
-
 namespace Summit.Core
 {
     using System.Collections.Generic;
@@ -16,6 +14,8 @@ namespace Summit.Core
     using System.Web.Routing;
 
     using Orchard.Mvc.Routes;
+
+    using Summit.Core.Routing;
 
     public class Routes : IRouteProvider {
         private readonly ITaxonomySlugConstraint _taxonomySlugConstraint;

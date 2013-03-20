@@ -1,17 +1,31 @@
-﻿using System;
-using System.Web.Mvc;
-using Summit.Core.Helpers;
-using Summit.Core.Services;
-using Orchard.DisplayManagement;
-using Orchard.Events;
-using Orchard.Localization;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TermsFilterForms.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace Summit.Core.Projections {
-    public interface IFormProvider : IEventHandler {
+namespace Summit.Core.Projections 
+{
+    using System;
+    using System.Web.Mvc;
+
+    using Orchard.DisplayManagement;
+    using Orchard.Events;
+    using Orchard.Localization;
+
+    using Summit.Core.Helpers;
+    using Summit.Core.Services;
+
+    public interface IFormProvider : IEventHandler 
+    {
         void Describe(dynamic context);
     }
 
-    public class TermsFilterForms : IFormProvider {
+    public class TermsFilterForms : IFormProvider 
+    {
         private readonly ITaxonomyService _taxonomyService;
         protected dynamic Shape { get; set; }
         public Localizer T { get; set; }

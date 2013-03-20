@@ -1,10 +1,21 @@
-﻿using System.Collections.Generic;
-using System.Web;
-using Summit.Core.ViewModels.Admin;
-using Orchard.Media.Models;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="MediaFolderEditViewModel.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.ViewModels.Multipicker
 {
+    using System.Collections.Generic;
+    using System.Web;
+
+    using Orchard.Media.Models;
+
+    using Summit.Core.ViewModels.Admin;
+
     public class MediaFolderEditViewModel
     {
         public string SearchFilter { get; set; }

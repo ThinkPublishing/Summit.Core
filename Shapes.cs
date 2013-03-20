@@ -1,10 +1,20 @@
-﻿using System.Collections.Generic;
-using Summit.Core.Models;
-using Orchard.ContentManagement;
-using Orchard.ContentManagement.Aspects;
-using Orchard.DisplayManagement.Descriptors;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Shapes.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core {
+    using System.Collections.Generic;
+
+    using Orchard.ContentManagement;
+    using Orchard.DisplayManagement.Descriptors;
+
+    using Summit.Core.Models;
+
     public class Shapes : IShapeTableProvider {
         public void Discover(ShapeTableBuilder builder) {
             builder.Describe("Content")

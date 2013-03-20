@@ -1,32 +1,48 @@
-using System.Linq;
-using System.Web.Mvc;
-using System.Web.Routing;
-using Summit.Core.Routing;
-using JetBrains.Annotations;
-using Orchard.ContentManagement;
-using Orchard.Core.Feeds;
-using Orchard.DisplayManagement;
-using Orchard.Localization;
-using Orchard.Logging;
-using Orchard.Mvc;
-using Orchard.Settings;
-using Summit.Core.Services;
-using Orchard.Themes;
-using Orchard.UI.Navigation;
-using Summit.Core.Attributes;
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TaxonomyHomeController.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   taxonomny home controller
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace Summit.Core.Controllers {
+namespace Summit.Core.Controllers
+{
+    using System.Linq;
+    using System.Web.Mvc;
+    using System.Web.Routing;
+
+    using JetBrains.Annotations;
+
+    using Orchard.ContentManagement;
+    using Orchard.Core.Feeds;
+    using Orchard.DisplayManagement;
+    using Orchard.Localization;
+    using Orchard.Logging;
+    using Orchard.Mvc;
+    using Orchard.Settings;
+    using Orchard.UI.Navigation;
+
+    using Summit.Core.Routing;
+    using Summit.Core.Services;
+
     [ValidateInput(false)]
-    public class TaxonomyHomeController : Controller {
+    public class TaxonomyHomeController : Controller
+    {
         private readonly ITaxonomyService _taxonomyService;
+
         private readonly IContentManager _contentManager;
+
         private readonly ISiteService _siteService;
+
         private readonly ITermPathConstraint _termPathConstraint;
+
         private readonly IFeedManager _feedManager;
 
         public TaxonomyHomeController(
-            ITaxonomyService taxonomyService, 
-            IContentManager contentManager, 
+            ITaxonomyService taxonomyService,
+            IContentManager contentManager,
             IShapeFactory shapeFactory,
             ISiteService siteService,
             ITermPathConstraint termPathConstraint,
@@ -40,21 +56,27 @@ namespace Summit.Core.Controllers {
             Shape = shapeFactory;
             T = NullLocalizer.Instance;
         }
-        
-        dynamic Shape { get; set; }
 
-        protected virtual ISite CurrentSite { get; [UsedImplicitly] private set; }
-        
+        private dynamic Shape { get; set; }
+
+        protected virtual ISite CurrentSite { get; [UsedImplicitly]
+        private set; }
+
         public ILogger Logger { get; set; }
+
         public Localizer T { get; set; }
 
-        public ActionResult List(string taxonomySlug, PagerParameters pagerParameters) {
+        public ActionResult List(string taxonomySlug, PagerParameters pagerParameters)
+        {
             var taxonomyPart = _taxonomyService.GetTaxonomyBySlug(taxonomySlug);
-            if (taxonomyPart == null) {
+            if (taxonomyPart == null)
+            {
                 return HttpNotFound();
             }
 
-            var terms = _taxonomyService.GetTerms(taxonomyPart.Id).Select(x => _contentManager.BuildDisplay(x.ContentItem, "Summary"));
+            var terms =
+                _taxonomyService.GetTerms(taxonomyPart.Id).Select(
+                    x => _contentManager.BuildDisplay(x.ContentItem, "Summary"));
             dynamic taxonomy = _contentManager.BuildDisplay(taxonomyPart);
 
             var list = Shape.List();
@@ -64,22 +86,22 @@ namespace Summit.Core.Controllers {
             return new ShapeResult(this, taxonomy);
         }
 
-        public ActionResult Item(string termPath, PagerParameters pagerParameters) {
+        public ActionResult Item(string termPath, PagerParameters pagerParameters)
+        {
             var pager = new Pager(_siteService.GetSiteSettings(), pagerParameters);
             var correctedPath = _termPathConstraint.FindPath(termPath);
-            if (correctedPath == null)
-                return HttpNotFound();
-            
+            if (correctedPath == null) return HttpNotFound();
+
             var termPart = _taxonomyService.GetTermByPath(correctedPath);
 
-            if (termPart == null)
-                return HttpNotFound();
+            if (termPart == null) return HttpNotFound();
 
             var taxonomy = _taxonomyService.GetTaxonomy(termPart.TaxonomyId);
             var totalItemCount = _taxonomyService.GetContentItemsCount(termPart);
 
-            var termContentItems = _taxonomyService.GetContentItems(termPart, pager.GetStartIndex(), pager.PageSize)
-                .Select(c => _contentManager.BuildDisplay(c, "Summary").Taxonomy(taxonomy).Term(termPart));
+            var termContentItems =
+                _taxonomyService.GetContentItems(termPart, pager.GetStartIndex(), pager.PageSize).Select(
+                    c => _contentManager.BuildDisplay(c, "Summary").Taxonomy(taxonomy).Term(termPart));
 
             dynamic term = _contentManager.BuildDisplay(termPart);
 
@@ -88,15 +110,10 @@ namespace Summit.Core.Controllers {
             list.AddRange(termContentItems);
 
             term.Content.Add(
-                Shape.Taxonomies_TermContentItems_List(ContentItems: list)
-                .Taxonomy(taxonomy)
-                .Term(termPart), "5");
+                Shape.Taxonomies_TermContentItems_List(ContentItems: list).Taxonomy(taxonomy).Term(termPart), "5");
 
             term.Content.Add(
-                Shape.Pager(pager)
-                    .TotalItemCount(totalItemCount)
-                    .Taxonomy(taxonomy)
-                    .Term(termPart), "Content:after");
+                Shape.Pager(pager).TotalItemCount(totalItemCount).Taxonomy(taxonomy).Term(termPart), "Content:after");
 
             // generates a link to the RSS feed for this term
             _feedManager.Register(termPart.Name, "rss", new RouteValueDictionary { { "term", termPart.Id } });

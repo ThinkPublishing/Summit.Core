@@ -1,12 +1,23 @@
-﻿using Orchard;
-using Orchard.ContentManagement;
-using Orchard.ContentManagement.Drivers;
-using Orchard.ContentManagement.Handlers;
-using Orchard.Localization;
-using Summit.Core.Fields;
-using Summit.Core.Settings;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="QuestionFieldDriver.cs" company="EMIS">
+//   Copyright (©)2013, EMIS Limited. All rights reserved.
+// </copyright>
+// <summary>
+//   question field driver
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace Summit.Core.Drivers {
+namespace Summit.Core.Drivers 
+{
+    using Orchard;
+    using Orchard.ContentManagement;
+    using Orchard.ContentManagement.Drivers;
+    using Orchard.ContentManagement.Handlers;
+    using Orchard.Localization;
+
+    using Summit.Core.Fields;
+    using Summit.Core.Settings;
+
     public class InputFieldDriver : ContentFieldDriver<QuestionField> {
         public IOrchardServices Services { get; set; }
         private const string TemplateName = "Fields/Question.Edit";

@@ -1,7 +1,17 @@
-﻿using System.Collections.Generic;
-using Summit.Core.Models;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TaxonomyFieldSettings.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.Settings {
+    using System.Collections.Generic;
+
+    using Summit.Core.Models;
+
     public class TaxonomyFieldSettings {
         /// <summary>
         /// Wether the field allows the user to add new Terms to the taxonomy (similar to tags)

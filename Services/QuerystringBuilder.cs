@@ -1,9 +1,18 @@
-﻿using System.Text;
-using System.Web;
-using System.Collections.Specialized;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="QuerystringBuilder.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.Services
 {
+    using System.Collections.Specialized;
+    using System.Text;
+    using System.Web;
+
     /// <summary>
     /// http://weblogs.asp.net/bradvincent/archive/2008/10/27/helper-class-querystring-builder-chainable.aspx
     /// </summary>

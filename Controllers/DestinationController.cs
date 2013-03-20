@@ -14,7 +14,6 @@ namespace Summit.Core.Controllers
 
     using Orchard;
     using Orchard.ContentManagement;
-    using Orchard.Core.Feeds;
     using Orchard.DisplayManagement;
     using Orchard.Logging;
     using Orchard.Mvc;

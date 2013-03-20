@@ -1,14 +1,23 @@
-﻿using System;
-using System.Linq;
-using System.Web.Mvc;
-using Summit.Core.Services;
-using ImageResizer.Configuration;
-using Orchard.Mvc.Extensions;
-using Orchard.Themes;
-using Orchard.UI.Admin;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ImageResizerController.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   resize image controller
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.Controllers
 {
+    using System.Web.Mvc;
+
+    using ImageResizer.Configuration;
+
+    using Orchard.Mvc.Extensions;
+    using Orchard.Themes;
+
+    using Summit.Core.Services;
+
     [HandleError]
     [Themed(false)]
     public class ImageResizerController : Controller

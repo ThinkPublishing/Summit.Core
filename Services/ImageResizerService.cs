@@ -1,20 +1,32 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.IO;
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using Summit.Core.ImageResizerFilters;
-using ImageResizer;
-using ImageResizer.Configuration;
-using Orchard;
-using Summit.Core.Extensions;
-using Orchard.Logging;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ImageResizerService.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Security.Cryptography;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Threading;
+
+    using ImageResizer;
+    using ImageResizer.Configuration;
+
+    using Orchard;
+    using Orchard.Logging;
+
+    using Summit.Core.Extensions;
+    using Summit.Core.ImageResizerFilters;
+
     public interface IImageResizerService : IDependency
     {
         string GetCleanFileExtension(string url);
@@ -215,14 +227,14 @@ namespace Summit.Core.Services
             string ext = GetCleanFileExtension(imageServerPath);
             if (!SupportedFileExtensions().Contains(ext))
             {
-                var alternativeUrl = GetServerPath(Consts.ModuleContentFolder + ext + ".png");
+                var alternativeUrl = GetServerPath(ImageConsts.ModuleContentFolder + ext + ".png");
                 if (File.Exists(alternativeUrl))
                 {
                     imageServerPath = alternativeUrl;
                 }
                 else
                 {
-                    return GetServerPath(Consts.ModuleContentFolder + "file.png");
+                    return GetServerPath(ImageConsts.ModuleContentFolder + "file.png");
                 }
             }
             return imageServerPath;
@@ -268,7 +280,7 @@ namespace Summit.Core.Services
                 Path.GetFileNameWithoutExtension(url), 
                 hasedProperties,
                 GetCleanFileExtension(url));
-            string cachedImagePath = string.Concat(Consts.CacheFolderPath, "/", cachedFileName.TrimStart('/', '\\'));
+            string cachedImagePath = string.Concat(ImageConsts.CacheFolderPath, "/", cachedFileName.TrimStart('/', '\\'));
             return cachedImagePath;
         }
 
@@ -301,7 +313,7 @@ namespace Summit.Core.Services
         internal void DeleteOldCache()
         {
             var mediaFolder = GetServerPath("/Media");
-            var cacheFolder = GetServerPath(Consts.CacheFolderPath);
+            var cacheFolder = GetServerPath(ImageConsts.CacheFolderPath);
             var cacheMediaFolders = Directory
                 .GetDirectories(cacheFolder, "*", SearchOption.AllDirectories)
                 .OrderBy(x => x.Length);
@@ -362,7 +374,7 @@ namespace Summit.Core.Services
 
         public void ClearCache()
         {
-            var cacheDir = new DirectoryInfo(GetServerPath(Consts.CacheFolderPath));
+            var cacheDir = new DirectoryInfo(GetServerPath(ImageConsts.CacheFolderPath));
             for (int i = 0; i < 10; i++)
             {
                 try
@@ -385,7 +397,7 @@ namespace Summit.Core.Services
 
         public void CacheStatistics(out long fileCount, out long totalSize)
         {
-            var cacheDir = new DirectoryInfo(GetServerPath(Consts.CacheFolderPath));
+            var cacheDir = new DirectoryInfo(GetServerPath(ImageConsts.CacheFolderPath));
             var allFiles = cacheDir.GetFiles("*.*", SearchOption.AllDirectories);
             fileCount = allFiles.Count();
             if (fileCount == 0)

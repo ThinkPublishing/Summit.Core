@@ -1,12 +1,18 @@
-﻿using FlashTools;
-using Orchard;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SwfService.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.Services
 {
+    using FlashTools;
+
+    using Orchard;
+
     public interface ISwfService : IDependency
     {
         void GetSwfFileDimensions(string fileServerPath, out int width, out int height);

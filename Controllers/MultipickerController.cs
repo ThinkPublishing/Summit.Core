@@ -1,26 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Web;
-using System.Web.Hosting;
-using System.Web.Mvc;
-using Summit.Core.Models;
-using Summit.Core.Services;
-using Summit.Core.ViewModels.Admin;
-using Summit.Core.ViewModels.Multipicker;
-using Orchard;
-using Orchard.Data;
-using Orchard.Environment.Configuration;
-using Orchard.Localization;
-using Orchard.Media;
-using Orchard.Media.Models;
-using Orchard.Media.Services;
-using Orchard.Themes;
-using Orchard.UI.Admin;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="MultipickerController.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   multi file picker controller
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Web;
+    using System.Web.Mvc;
+
+    using Orchard;
+    using Orchard.Localization;
+    using Orchard.Media.Models;
+    using Orchard.Media.Services;
+    using Orchard.Themes;
+    using Orchard.UI.Admin;
+
+    using Summit.Core.Services;
+    using Summit.Core.ViewModels.Admin;
+    using Summit.Core.ViewModels.Multipicker;
+
     [Themed(false)]
     [Admin]
     public class MultipickerController : Controller

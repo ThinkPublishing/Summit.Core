@@ -1,21 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Web.Mvc;
-using JetBrains.Annotations;
-using Orchard;
-using Orchard.ContentManagement;
-using Orchard.ContentManagement.Aspects;
-using Orchard.Localization;
-using Orchard.Settings;
-using Orchard.UI.Admin;
-using Summit.Core.Models;
-using Summit.Core.ViewModels;
-using Summit.Core.Services;
-using Orchard.UI.Notify;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TaxonomyAdminController.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   taxonomy admin controller
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace Summit.Core.Controllers {
+namespace Summit.Core.Controllers 
+{
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Web.Mvc;
+
+    using JetBrains.Annotations;
+
+    using Orchard;
+    using Orchard.ContentManagement;
+    using Orchard.Localization;
+    using Orchard.Settings;
+    using Orchard.UI.Admin;
+    using Orchard.UI.Notify;
+
+    using Summit.Core.Models;
+    using Summit.Core.Services;
+    using Summit.Core.ViewModels;
 
     [ValidateInput(false)]
     [Admin]

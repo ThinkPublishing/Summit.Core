@@ -1,9 +1,19 @@
-﻿using Summit.Core.Models;
-using Orchard.ContentManagement;
-using Orchard.Localization;
-using Orchard.UI.Navigation;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TaxonomyNavigationProvider.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.Services {
+    using Orchard.ContentManagement;
+    using Orchard.Localization;
+    using Orchard.UI.Navigation;
+
+    using Summit.Core.Models;
+
     public class TaxonomyNavigationProvider : INavigationProvider {
         private readonly IContentManager _contentManager;
         private readonly ITaxonomyService _taxonomyService;

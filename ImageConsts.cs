@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BreadcrumbViewModel.cs" company="Zaust">
+// <copyright file="ImageConsts.cs" company="Zaust">
 //   Copyright (©)2013, zaust.com. All rights reserved.
 // </copyright>
 // <summary>
@@ -7,11 +7,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Summit.Core.ViewModels.Admin
+namespace Summit.Core
 {
-    public class BreadcrumbViewModel
+    public static class ImageConsts
     {
-        public string FolderName { get; set; }
-        public string MediaPath { get; set; }
+        public static readonly string CacheFolderPath = "/Media/Amba.ImageCache";
+        public static string ModuleContentFolder = @"/modules/Summit.Core/content/";
     }
 }

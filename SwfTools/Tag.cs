@@ -1,8 +1,17 @@
-using System;
-using System.Diagnostics;
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Tag.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace FlashTools
 {
+    using System;
+    using System.Diagnostics;
+
     public class Tag
     {
         private ushort id;

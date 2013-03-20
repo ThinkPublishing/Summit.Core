@@ -1,13 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Summit.Core.Services;
-using Orchard.Logging;
-using Orchard.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="CacheCleanupTask.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.Tasks
 {
+    using System;
+
+    using Orchard.Logging;
+    using Orchard.Tasks;
+
+    using Summit.Core.Services;
+
     public class CacheCleanupTask : IBackgroundTask
     {
         private static bool _wasStarted = false;

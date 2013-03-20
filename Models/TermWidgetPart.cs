@@ -1,8 +1,20 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Orchard.ContentManagement;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TermWidgetPart.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace Summit.Core.Models {
-    public class TermWidgetPart : ContentPart<TermWidgetPartRecord> {
+namespace Summit.Core.Models 
+{
+    using System.ComponentModel.DataAnnotations;
+
+    using Orchard.ContentManagement;
+
+    public class TermWidgetPart : ContentPart<TermWidgetPartRecord> 
+    {
         /// <summary>
         /// The taxonomy to display
         /// </summary>

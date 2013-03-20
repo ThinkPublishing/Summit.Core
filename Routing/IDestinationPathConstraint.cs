@@ -9,10 +9,10 @@
 
 namespace Summit.Core.Routing
 {
-    using Orchard;
-
     using System.Collections.Generic;
     using System.Web.Routing;
+
+    using Orchard;
 
     public interface IDestinationPathConstraint : IRouteConstraint, ISingletonDependency
     {

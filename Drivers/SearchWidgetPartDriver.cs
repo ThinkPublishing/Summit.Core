@@ -1,9 +1,9 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="HotelPartDriver.cs" company="Zaust">
+// <copyright file="SearchWidgetPartDriver.cs" company="Zaust">
 //   Copyright (©)2013, zaust.com. All rights reserved.
 // </copyright>
 // <summary>
-//   driver for hotel part
+//   search widget part driver
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 

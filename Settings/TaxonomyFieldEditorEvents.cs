@@ -1,13 +1,24 @@
-﻿using System.Collections.Generic;
-using Orchard.ContentManagement;
-using Orchard.ContentManagement.MetaData;
-using Orchard.ContentManagement.MetaData.Builders;
-using Orchard.ContentManagement.MetaData.Models;
-using Orchard.ContentManagement.ViewModels;
-using Summit.Core.Services;
-using Orchard.Localization;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TaxonomyFieldEditorEvents.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.Settings {
+    using System.Collections.Generic;
+
+    using Orchard.ContentManagement;
+    using Orchard.ContentManagement.MetaData;
+    using Orchard.ContentManagement.MetaData.Builders;
+    using Orchard.ContentManagement.MetaData.Models;
+    using Orchard.ContentManagement.ViewModels;
+    using Orchard.Localization;
+
+    using Summit.Core.Services;
+
     public class TaxonomyFieldEditorEvents : ContentDefinitionEditorEventsBase {
         private readonly ITaxonomyService _taxonomyService;
 

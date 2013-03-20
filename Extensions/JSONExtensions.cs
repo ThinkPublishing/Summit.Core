@@ -1,7 +1,16 @@
-﻿using Newtonsoft.Json;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="JSONExtensions.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.Extensions
 {
+    using Newtonsoft.Json;
+
     internal static class JsonExtensions
     {
         public static string ToJson<T>(this T obj)

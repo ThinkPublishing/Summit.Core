@@ -1,8 +1,17 @@
-﻿using System;
-using System.IO;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SwfHeaderReader.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core
 {
+    using System;
+    using System.IO;
+
     /// <summary>
     /// Summary description for FlashHeaderReader.
     /// </summary>

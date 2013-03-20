@@ -1,8 +1,19 @@
-﻿using System.Collections.Generic;
-using Summit.Core.Models;
-using Orchard.ContentManagement;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TermAdminIndexViewModel.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.ViewModels {
+    using System.Collections.Generic;
+
+    using Orchard.ContentManagement;
+
+    using Summit.Core.Models;
+
     public class TermAdminIndexViewModel {
         public IList<TermEntry> Terms { get; set; }
         public TermsAdminIndexBulkAction BulkAction { get; set; }

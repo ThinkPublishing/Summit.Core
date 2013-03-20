@@ -1,14 +1,14 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DestinationAdminController.cs" company="Zaust">
+// <copyright file="ConceirgeAdminController.cs" company="Zaust">
 //   Copyright (©)2013, zaust.com. All rights reserved.
 // </copyright>
 // <summary>
-//   destination admin controller
+//   Conceirge admin
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Summit.Core.Controllers {
-    using System.Linq;
+namespace Summit.Core.Controllers 
+{
     using System.Web.Mvc;
 
     using Orchard;
@@ -21,9 +21,9 @@ namespace Summit.Core.Controllers {
     using Orchard.UI.Navigation;
     using Orchard.UI.Notify;
 
-    using Extensions;
-    using Models;
-    using Services;
+    using Summit.Core.Extensions;
+    using Summit.Core.Models;
+    using Summit.Core.Services;
 
     [ValidateInput(false)]
     [Admin]

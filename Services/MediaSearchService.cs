@@ -1,15 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Web.Hosting;
-using Orchard;
-using Orchard.Environment.Configuration;
-using Orchard.Media.Models;
-using Orchard.Media.Services;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="MediaSearchService.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Web.Hosting;
+
+    using Orchard;
+    using Orchard.Environment.Configuration;
+    using Orchard.Media.Models;
+    using Orchard.Media.Services;
+
     public interface IMediaSearchService : IDependency
     {
         IEnumerable<MediaFile> FindFiles(string mediaPath, string pattern);

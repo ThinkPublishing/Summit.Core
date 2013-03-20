@@ -1,10 +1,22 @@
-﻿using Summit.Core.Models;
-using Newtonsoft.Json;
-using Orchard.ContentManagement;
-using System.Collections.Generic;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ImageMultiPickerField.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.Fields
 {
+    using System.Collections.Generic;
+
+    using Newtonsoft.Json;
+
+    using Orchard.ContentManagement;
+
+    using Summit.Core.Models;
+
     public class ImageMultiPickerField : ContentField
     {
         private IEnumerable<SelectedImage> _dataCache = null;
@@ -26,11 +38,9 @@ namespace Summit.Core.Fields
         {
             get
             {
-                if (_dataCache != null)
-                    return _dataCache;
+                if (_dataCache != null) return _dataCache;
                 var data = Data;
-                if (string.IsNullOrEmpty(data))
-                    return new List<SelectedImage>();
+                if (string.IsNullOrEmpty(data)) return new List<SelectedImage>();
                 _dataCache = JsonConvert.DeserializeObject<IEnumerable<SelectedImage>>(data);
                 return _dataCache;
             }

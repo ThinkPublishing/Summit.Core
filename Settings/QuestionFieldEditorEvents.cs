@@ -1,12 +1,21 @@
-﻿using System.Collections.Generic;
-using Orchard.ContentManagement;
-using Orchard.ContentManagement.MetaData;
-using Orchard.ContentManagement.MetaData.Builders;
-using Orchard.ContentManagement.MetaData.Models;
-using Orchard.ContentManagement.ViewModels;
-using Summit.Core.Settings;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="QuestionFieldEditorEvents.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.Settings {
+    using System.Collections.Generic;
+
+    using Orchard.ContentManagement;
+    using Orchard.ContentManagement.MetaData;
+    using Orchard.ContentManagement.MetaData.Builders;
+    using Orchard.ContentManagement.MetaData.Models;
+    using Orchard.ContentManagement.ViewModels;
+
     public class QuestionFieldListModeEvents : ContentDefinitionEditorEventsBase {
 
         public override IEnumerable<TemplateViewModel> PartFieldEditor(ContentPartFieldDefinition definition) {

@@ -1,10 +1,19 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
-using System.Web.UI.WebControls.WebParts;
-using Summit.Core.Models;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TermWidgetViewModel.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.ViewModels {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
+
+    using Summit.Core.Models;
+
     public class TermWidgetViewModel {
         public SelectList AvailableTaxonomies { get; set; }
 

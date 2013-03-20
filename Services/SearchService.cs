@@ -1,13 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Orchard.ContentManagement;
-using Orchard.ContentManagement.Aspects;
-using Orchard.ContentManagement.Records;
-using Orchard.Core.Title.Models;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SearchService.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core.Services {
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Orchard.ContentManagement;
+    using Orchard.Core.Title.Models;
+
     public class SearchService : ISearchService {
         private readonly IContentManager contentManager;
 

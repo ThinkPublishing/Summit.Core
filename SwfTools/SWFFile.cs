@@ -1,13 +1,22 @@
-using System;
-using System.Diagnostics;
-using System.IO;
-using System.Text;
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SWFFile.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 // NOTE: To read compressed SWF files, you'll need to download SharpZipLib and add a reference to ICSharpCode.SharpZipLib.dll
 //       to this project. SharpZipLib can be downloaded from: http://www.icsharpcode.net/OpenSource/SharpZipLib/
 
 namespace FlashTools
 {
+    using System;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Text;
+
     public class SWFFile
     {
         private Stream stream = null;

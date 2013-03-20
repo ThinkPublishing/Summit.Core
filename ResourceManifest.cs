@@ -1,6 +1,15 @@
-using Orchard.UI.Resources;
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ResourceManifest.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core {
+    using Orchard.UI.Resources;
+
     public class ResourceManifest : IResourceManifestProvider {
         public void BuildManifests(ResourceManifestBuilder builder) {
             var manifest = builder.Add();

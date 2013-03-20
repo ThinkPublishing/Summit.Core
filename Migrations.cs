@@ -1,12 +1,21 @@
-﻿using System;
-using Orchard.ContentManagement.MetaData;
-using Orchard.Core.Contents.Extensions;
-using Orchard.Data.Migration;
-using Orchard.Projections.Models;
-using Orchard.Projections.Services;
-using Summit.Core.Models;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Migrations.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Summit.Core {
+    using System;
+
+    using Orchard.ContentManagement.MetaData;
+    using Orchard.Core.Contents.Extensions;
+    using Orchard.Data.Migration;
+
+    using Summit.Core.Models;
+
     public class Migration : DataMigrationImpl {
 
         public int Create() {
@@ -65,6 +74,7 @@ namespace Summit.Core {
 
             ContentDefinitionManager.AlterTypeDefinition("Concierge",
               cfg => cfg
+                  .WithPart("IdentityPart")
                   .WithPart("CommonPart", p => p
                       .WithSetting("DateEditorSettings.ShowDateEditor", "false")
                       .WithSetting("OwnerEditorSettings.ShowOwnerEditor", "false"))
@@ -98,6 +108,7 @@ namespace Summit.Core {
                         .WithField("Quote", field => field.OfType("TextField").WithDisplayName("Quote").WithSetting("TextFieldSettings.Flavor", "Html"))
                         .WithField("Region", field => field.OfType("TaxonomyField").WithDisplayName("Region").WithSetting("TaxonomyFieldSettings.Taxonomy", "Region").WithSetting("TaxonomyFieldSettings.LeavesOnly", "true").WithSetting("TaxonomyFieldSettings.SingleChoice", "true"))
                         .WithField("Gallery", field => field.OfType("ImageMultiPickerField"))
+                        .WithField("Featured", field => field.OfType("BooleanField").WithDisplayName("Featured"))
                         );
 
             ContentDefinitionManager.AlterTypeDefinition("Hotel",

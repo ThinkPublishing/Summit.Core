@@ -1,12 +1,23 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Orchard.ContentManagement;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TaxonomyMenuPart.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace Summit.Core.Models {
+namespace Summit.Core.Models 
+{
+    using System.ComponentModel.DataAnnotations;
+
+    using Orchard.ContentManagement;
+
     /// <summary>
     /// Represents the part for the Taxonomy Menu Widget
     /// </summary>
-    public class TaxonomyMenuPart : ContentPart<TaxonomyMenuPartRecord> {
-
+    public class TaxonomyMenuPart : ContentPart<TaxonomyMenuPartRecord> 
+    {
         /// <summary>
         /// The taxonomy to display
         /// </summary>

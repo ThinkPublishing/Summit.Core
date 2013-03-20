@@ -21,7 +21,8 @@ namespace Summit.Core.Routing
     using Summit.Core.Services;
 
     [UsedImplicitly]
-    public class DestinationPathConstraintUpdator : IOrchardShellEvents, IBackgroundTask {
+    public class DestinationPathConstraintUpdator : IOrchardShellEvents, IBackgroundTask 
+    {
         private readonly IDestinationPathConstraint destinationPathConstraint;
         private readonly IDestinationService destinationService;
 

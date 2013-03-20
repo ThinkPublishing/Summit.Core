@@ -1,4 +1,13 @@
-﻿namespace Summit.Core.Services
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ResizeSettingTypes.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Summit.Core.Services
 {
     /// <summary>
     /// http://imageresizing.net/

@@ -1,31 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Summit.Core.Models;
-using JetBrains.Annotations;
-using Orchard;
-using Orchard.ContentManagement;
-using Orchard.ContentManagement.Drivers;
-using Orchard.ContentManagement.Handlers;
-using Orchard.Data;
-using Orchard.Localization;
-using Summit.Core.Fields;
-using Summit.Core.Services;
-using Summit.Core.Settings;
-using Summit.Core.ViewModels;
-using Summit.Core.Helpers;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TaxonomyFieldDriver.cs" company="Zaust">
+//   Copyright (©)2013, zaust.com. All rights reserved.
+// </copyright>
+// <summary>
+//   FileDescription
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace Summit.Core.Drivers {
+namespace Summit.Core.Drivers
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using JetBrains.Annotations;
+
+    using Orchard;
+    using Orchard.ContentManagement;
+    using Orchard.ContentManagement.Drivers;
+    using Orchard.ContentManagement.Handlers;
+    using Orchard.Data;
+    using Orchard.Localization;
+
+    using Summit.Core.Fields;
+    using Summit.Core.Helpers;
+    using Summit.Core.Models;
+    using Summit.Core.Services;
+    using Summit.Core.Settings;
+    using Summit.Core.ViewModels;
+
     [UsedImplicitly]
-    public class TaxonomyFieldDriver : ContentFieldDriver<TaxonomyField> {
+    public class TaxonomyFieldDriver : ContentFieldDriver<TaxonomyField>
+    {
         private readonly ITaxonomyService _taxonomyService;
+
         public IOrchardServices Services { get; set; }
+
         private const string TemplateName = "Fields/Contrib.TaxonomyField";
 
         public TaxonomyFieldDriver(
-            IOrchardServices services, 
-            ITaxonomyService taxonomyService,
-            IRepository<TermContentItem> repository) {
+            IOrchardServices services, ITaxonomyService taxonomyService, IRepository<TermContentItem> repository)
+        {
             _taxonomyService = taxonomyService;
             Services = services;
             T = NullLocalizer.Instance;
@@ -33,60 +48,79 @@ namespace Summit.Core.Drivers {
 
         public Localizer T { get; set; }
 
-        private static string GetPrefix(ContentField field, ContentPart part) {
+        private static string GetPrefix(ContentField field, ContentPart part)
+        {
             return part.PartDefinition.Name + "." + field.Name;
         }
 
-        private static string GetDifferentiator(TaxonomyField field, ContentPart part) {
+        private static string GetDifferentiator(TaxonomyField field, ContentPart part)
+        {
             return field.Name;
         }
-        protected override DriverResult Display(ContentPart part, TaxonomyField field, string displayType, dynamic shapeHelper) {
 
-            return ContentShape("Fields_Contrib_TaxonomyField", GetDifferentiator(field, part),
-                () => {
-                    var settings = field.PartFieldDefinition.Settings.GetModel<TaxonomyFieldSettings>();
-                    var terms = _taxonomyService.GetTermsForContentItem(part.ContentItem.Id, field.Name).ToList();
-                    var taxonomy = _taxonomyService.GetTaxonomyByName(settings.Taxonomy);
+        protected override DriverResult Display(
+            ContentPart part, TaxonomyField field, string displayType, dynamic shapeHelper)
+        {
 
-                    return shapeHelper.Fields_Contrib_TaxonomyField(
-                        ContentField: field,
-                        Terms: terms,
-                        Settings: settings,
-                        Taxonomy: taxonomy);
-                });
+            return ContentShape(
+                "Fields_Contrib_TaxonomyField",
+                GetDifferentiator(field, part),
+                () =>
+                    {
+                        var settings = field.PartFieldDefinition.Settings.GetModel<TaxonomyFieldSettings>();
+                        var terms = _taxonomyService.GetTermsForContentItem(part.ContentItem.Id, field.Name).ToList();
+                        var taxonomy = _taxonomyService.GetTaxonomyByName(settings.Taxonomy);
+
+                        return shapeHelper.Fields_Contrib_TaxonomyField(
+                            ContentField: field, Terms: terms, Settings: settings, Taxonomy: taxonomy);
+                    });
         }
 
-        protected override DriverResult Editor(ContentPart part, TaxonomyField field, dynamic shapeHelper) {
+        protected override DriverResult Editor(ContentPart part, TaxonomyField field, dynamic shapeHelper)
+        {
             var settings = field.PartFieldDefinition.Settings.GetModel<TaxonomyFieldSettings>();
 
-            var appliedTerms = _taxonomyService.GetTermsForContentItem(part.ContentItem.Id, field.Name).ToDictionary(t => t.Id, t => t);
+            var appliedTerms =
+                _taxonomyService.GetTermsForContentItem(part.ContentItem.Id, field.Name).ToDictionary(t => t.Id, t => t);
             var taxonomy = _taxonomyService.GetTaxonomyByName(settings.Taxonomy);
             var terms = _taxonomyService.GetTerms(taxonomy.Id).Select(t => t.CreateTermEntry()).ToList();
 
             terms.ForEach(t => t.IsChecked = appliedTerms.ContainsKey(t.Id));
 
-            var viewModel = new TaxonomyFieldViewModel {
-                Name = field.Name,
-                Terms = terms,
-                Settings = settings,
-                SingleTermId = terms.Where(t => t.IsChecked).Select(t => t.Id).FirstOrDefault()
-            };
+            var viewModel = new TaxonomyFieldViewModel
+                {
+                    Name = field.Name,
+                    Terms = terms,
+                    Settings = settings,
+                    SingleTermId = terms.Where(t => t.IsChecked).Select(t => t.Id).FirstOrDefault()
+                };
 
-            return ContentShape("Fields_Contrib_TaxonomyField_Edit", GetDifferentiator(field, part),
-                () => shapeHelper.EditorTemplate(TemplateName: TemplateName, Model: viewModel, Prefix: GetPrefix(field, part)));
+            return ContentShape(
+                "Fields_Contrib_TaxonomyField_Edit",
+                GetDifferentiator(field, part),
+                () =>
+                shapeHelper.EditorTemplate(TemplateName: TemplateName, Model: viewModel, Prefix: GetPrefix(field, part)));
         }
 
-        protected override DriverResult Editor(ContentPart part, TaxonomyField field, IUpdateModel updater, dynamic shapeHelper) {
-            var viewModel = new TaxonomyFieldViewModel { Terms =  new List<TermEntry>() };
+        protected override DriverResult Editor(
+            ContentPart part, TaxonomyField field, IUpdateModel updater, dynamic shapeHelper)
+        {
+            var viewModel = new TaxonomyFieldViewModel { Terms = new List<TermEntry>() };
 
-            if(updater.TryUpdateModel(viewModel, GetPrefix(field, part), null, null)) {
-                var checkedTerms = viewModel.Terms.Where(t => t.IsChecked || t.Id == viewModel.SingleTermId).Select(t => _taxonomyService.GetTerm(t.Id)).ToList();
+            if (updater.TryUpdateModel(viewModel, GetPrefix(field, part), null, null))
+            {
+                var checkedTerms =
+                    viewModel.Terms.Where(t => t.IsChecked || t.Id == viewModel.SingleTermId).Select(
+                        t => _taxonomyService.GetTerm(t.Id)).ToList();
 
                 if (!checkedTerms.Any())
-                { // maybe do a setting for required at some point
-                    updater.AddModelError(GetPrefix(field, part), T("The field {0} is mandatory.", T(field.DisplayName)));
+                {
+                    // maybe do a setting for required at some point
+                    updater.AddModelError(
+                        GetPrefix(field, part), T("The field {0} is mandatory.", T(field.DisplayName)));
                 }
-                else {
+                else
+                {
                     _taxonomyService.UpdateTerms(part.ContentItem, checkedTerms, field.Name);
                 }
             }
@@ -94,28 +128,34 @@ namespace Summit.Core.Drivers {
             return Editor(part, field, shapeHelper);
         }
 
-        protected override void Exporting(ContentPart part, TaxonomyField field, ExportContentContext context) {
+        protected override void Exporting(ContentPart part, TaxonomyField field, ExportContentContext context)
+        {
             var appliedTerms = _taxonomyService.GetTermsForContentItem(part.ContentItem.Id, field.Name);
 
             // stores all content items associated to this field
-            var termIdentities = appliedTerms.Select(x => Services.ContentManager.GetItemMetadata(x).Identity.ToString())
-                .ToArray();
+            var termIdentities =
+                appliedTerms.Select(x => Services.ContentManager.GetItemMetadata(x).Identity.ToString()).ToArray();
 
-            context.Element(field.FieldDefinition.Name + "." + field.Name).SetAttributeValue("Terms", String.Join(",", termIdentities));
+            context.Element(field.FieldDefinition.Name + "." + field.Name).SetAttributeValue(
+                "Terms", String.Join(",", termIdentities));
         }
 
-        protected override void Importing(ContentPart part, TaxonomyField field, ImportContentContext context) {
+        protected override void Importing(ContentPart part, TaxonomyField field, ImportContentContext context)
+        {
             var termIdentities = context.Attribute(field.FieldDefinition.Name + "." + field.Name, "Terms");
-            if (termIdentities == null) {
+            if (termIdentities == null)
+            {
                 return;
             }
 
             var terms = new List<ContentItem>();
 
-            foreach (var identity in termIdentities.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)) {
+            foreach (var identity in termIdentities.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
                 var contentItem = context.GetItemFromSession(identity);
 
-                if (contentItem == null) {
+                if (contentItem == null)
+                {
                     continue;
                 }
 

@@ -1,8 +1,15 @@
 ﻿@using Orchard.Utility.Extensions;
+@using Summit.Core.Fields
+@using Summit.Core.Helpers;
 @{
     var contentTypeClassName = ((string)Model.ContentItem.ContentType).HtmlClassify();
+	var images = (ImageMultiPickerField)Model.ContentItem.HotelPart.Gallery;
+	var image = images.FirstOrDefault();
 }
 <article class="content-item @contentTypeClassName">
-    <img src="@Url.Content(Model.ContentItem.HotelPart.Logo.Url)" style="width: 75px; height: 75px"/> 
+	@if (image != null)
+	{
+		@Html.ResizedImage(image.FilePath, width:120, height:120, htmlAttributes: new {alt = "Lolcats"}) 
+	}
     <h3><a href="/@Model.ContentItem.AutoroutePart.Path">@Model.ContentItem.TitlePart.Title</a></h3>
 </article>
